@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -57,107 +58,114 @@ public class CharacterController : MonoBehaviour
 
         if (IsInAssembler)
         {
-            //Pour les déplacement dans l'assembleur, on ajoute un délai entre chaque input pour éviter le spamme du bouton
-            if (movement != Vector2.zero && timeSinceLastInput >= delayBetweenInput)
-            {
-                timeSinceLastInput = 0;
-
-                var domino = objectCarried.GetComponent<DominoBehavior>();
-
-                if (movement.normalized.x > 0.8)
-                {
-                    domino.MoveDominoRight();
-                }
-                else if (movement.normalized.x < -0.8)
-                {
-                    domino.MoveDominoLeft();
-                }
-                else if (movement.normalized.y < 0)
-                {
-                    domino.MoveDominoDown();
-                }
-                else if (movement.normalized.y > 0)
-                {
-                    domino.MoveDominoUp();
-                }
-
-                assemblerManager.CreateSpriteForAddedDomino(domino.domino);
-            }
+            UpdateSelection();
         }
         else
         {
-            #region Move player
-            var isMovingSide = false;
-            var isMovingUp = false;
-            var isMovingDown = false;
-
-            if (!isStopped)
-            {
-                dashTimer += Time.deltaTime;
-
-                if (dashTimer > dashCooldown)
-                {
-                    canDash = true;
-                }
-
-                if (isDashing)
-                {
-                    rigidbodyCharacter.MovePosition(rigidbodyCharacter.position + dashSpeed * Time.deltaTime * lastDirection);
-
-
-                    if (dashTimer > dashDuration)
-                    {
-                        isDashing = false;
-                    }
-                }
-                else
-                {
-                    if (movement != Vector2.zero && movement.magnitude > 0.8)
-                    {
-                        lastDirection = movement;
-                    }
-
-                    if (movement.x > 0.5 || movement.x < -0.5)
-                    {
-                        isMovingSide = true;
-                        spriteRenderer.flipX = movement.x < 0;
-                    }
-                    else if (movement.y < 0)
-                    {
-                        isMovingDown = true;
-                    }
-                    else if (movement.y > 0)
-                    {
-                        isMovingUp = true;
-                    }
-
-                    interactTriggerZone.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.down, lastDirection));
-                    rigidbodyCharacter.MovePosition(rigidbodyCharacter.position + speed * Time.deltaTime * movement);
-                }
-            }
-
-            animator.SetBool("isMovingSide", isMovingSide);
-            animator.SetBool("isMovingUp", isMovingUp);
-            animator.SetBool("isMovingDown", isMovingDown);
-
-            if (objectCarried != null)
-            {
-                if (movement != Vector2.zero)
-                {
-                    objectCarried.position = transform.position + (Vector3)movement.normalized * objectCarriedDistanceFactor + offsetObjectCarriedDistance;
-                    objectCarried.GetComponent<SpriteRenderer>().sortingOrder = movement.y < 0 && movement.x < 0.4 && movement.x > -0.4 ? 15 : 5;
-                }
-                else
-                {
-                    objectCarried.position = transform.position + (Vector3)(lastDirection * objectCarriedDistanceFactor) + offsetObjectCarriedDistance;
-                    objectCarried.GetComponent<SpriteRenderer>().sortingOrder = lastDirection.y > 0.5 ? 5 : 15;
-                }
-
-            }
-
-            #endregion In movement
-
+            UpdateMovements();
             UpdateOutlines();
+        }
+    }
+
+    void UpdateSelection()
+    {
+        //Pour les déplacement dans l'assembleur, on ajoute un délai entre chaque input pour éviter le spamme du bouton
+        if (movement != Vector2.zero && timeSinceLastInput >= delayBetweenInput)
+        {
+            timeSinceLastInput = 0;
+
+            var domino = objectCarried.GetComponent<DominoBehavior>();
+
+            if (movement.normalized.x > 0.8)
+            {
+                domino.MoveDominoRight();
+            }
+            else if (movement.normalized.x < -0.8)
+            {
+                domino.MoveDominoLeft();
+            }
+            else if (movement.normalized.y < 0)
+            {
+                domino.MoveDominoDown();
+            }
+            else if (movement.normalized.y > 0)
+            {
+                domino.MoveDominoUp();
+            }
+
+            assemblerManager.CreateSpriteForAddedDomino(domino.domino);
+        }
+    }
+
+    void UpdateMovements()
+    {
+        var isMovingSide = false;
+        var isMovingUp = false;
+        var isMovingDown = false;
+
+        if (!isStopped)
+        {
+            dashTimer += Time.fixedDeltaTime;
+
+            if (dashTimer > dashCooldown)
+            {
+                canDash = true;
+            }
+
+            if (isDashing)
+            {
+                rigidbodyCharacter.MovePosition(rigidbodyCharacter.position + dashSpeed * Time.fixedDeltaTime * lastDirection);
+
+
+                if (dashTimer > dashDuration)
+                {
+                    isDashing = false;
+                }
+            }
+            else
+            {
+                if (movement != Vector2.zero && movement.magnitude > 0.8)
+                {
+                    lastDirection = movement;
+                }
+
+                if (movement.y < -0.5)
+                {
+                    isMovingDown = true;
+                }
+                else if (movement.y > 0.5)
+                {
+                    isMovingUp = true;
+                }
+                else if (movement.x != 0)
+                {
+                    isMovingSide = true;
+                    spriteRenderer.flipX = movement.x < 0;
+                }
+
+                interactTriggerZone.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.down, lastDirection));
+                rigidbodyCharacter.MovePosition(rigidbodyCharacter.position + speed * Time.fixedDeltaTime * movement);
+            }
+
+        }
+
+        animator.SetBool("isMovingSide", isMovingSide);
+        animator.SetBool("isMovingUp", isMovingUp);
+        animator.SetBool("isMovingDown", isMovingDown);
+
+        if (objectCarried != null)
+        {
+            if (movement != Vector2.zero)
+            {
+                objectCarried.position = transform.position + (Vector3)movement.normalized * objectCarriedDistanceFactor + offsetObjectCarriedDistance;
+                objectCarried.GetComponent<SpriteRenderer>().sortingOrder = movement.y < 0 && movement.x < 0.4 && movement.x > -0.4 ? 15 : 5;
+            }
+            else
+            {
+                objectCarried.position = transform.position + (Vector3)(lastDirection * objectCarriedDistanceFactor) + offsetObjectCarriedDistance;
+                objectCarried.GetComponent<SpriteRenderer>().sortingOrder = lastDirection.y > 0.5 ? 5 : 15;
+            }
+
         }
     }
 
