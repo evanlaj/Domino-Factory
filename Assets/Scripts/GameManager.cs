@@ -11,54 +11,68 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private int life = 3;
 
-    private static readonly float initialDominoRequestDuration = 40f;
-    private static readonly float minDominoRequestDuration = 30f;
-    
-    public float dominoRequestDuration = initialDominoRequestDuration;
-
-    private static readonly  float timeToReachMinimumRequestDuration = 180;
-
+    // Block Sprite Management
     [SerializeField] private Sprite defaultBlockSprite;
-    [SerializeField] private Sprite blueBlockSprite;
-    [SerializeField] private Sprite lightBlueBlockSprite;
     [SerializeField] private Sprite redBlockSprite;
-    [SerializeField] private Sprite lightRedBlockSprite;
+    [SerializeField] private Sprite greenBlockSprite;
+    [SerializeField] private Sprite blueBlockSprite;
+    [SerializeField] private Sprite yellowBlockSprite;
+    [SerializeField] private Sprite cyanBlockSprite;
+    [SerializeField] private Sprite purpleBlockSprite;
     [SerializeField] private Sprite blackBlockSprite;
+    [SerializeField] private Sprite lightBlueBlockSprite;
+    [SerializeField] private Sprite lightRedBlockSprite;
 
-    //Dictionnaire contenants les événements ainsi que les timers 
+    private static readonly int spriteSize = 512;
+    private static readonly int blockPixelSize = spriteSize / 32;
+    private static readonly int blockSizeY = 6 * blockPixelSize;
+    private static readonly int blockSizeX = 7 * blockPixelSize;
+
+    private static readonly int blockSideSize = 5 * blockPixelSize;
+    private static readonly int fullBlockHeight = blockSizeY + blockSideSize;
+
+    // private Color blueOutline = new Color(27 / 255f, 33 / 255f, 114 / 255f, 1);
+    // private Color lightBlueOutline = new Color(51 / 255f, 57 / 255f, 132 / 255f, 1);
+    // private Color redOutline = new Color(82 / 255f, 1 / 255f, 1 / 255f, 1);
+    // private Color lightRedOutline = new Color(117 / 255f, 11 / 255f, 11 / 255f, 1);
+    // private Color defaultOutline = new Color(24 / 255f, 24 / 255f, 24 / 255f, 1);
+    // private Color blackOutline = Color.black;
+
+    // Domino Request Management
+
+    private static readonly float timeToReachMinimumRequestDuration = 180;
+
+
+    //Dictionnaire contenants les ï¿½vï¿½nements ainsi que les timers 
     [Serializable]
     public struct FactoryEvent
     {
         public float timer;
-        //Todo: essayer de passer à une référence de script plutot que via un prefab
+        //Todo: essayer de passer ï¿½ une rï¿½fï¿½rence de script plutot que via un prefab
         public GameObject eventToStart;
         public bool loop;
     }
+    private static readonly float minUpperBound = 20f;
+    private static readonly float initialUpperBound = 32f;
+    private static readonly float minLowerBound = 8f;
+    private static readonly float initialLowerBound = 16f;
+
+
+    private static readonly float initialDominoRequestDuration = 40f;
+    private static readonly float minDominoRequestDuration = 30f;
 
     [SerializeField] private FactoryEvent[] events;
 
-    private static readonly float minUpperBound = 30f;
-    private static readonly float initialUpperBound = 40f;
-    private static readonly float minLowerBound = 15f;
-    private static readonly float initialLowerBound = 25f;
-
-    private static readonly  float timeToReachMinimumDelayBetweenRequests = 180;
+    private static readonly float timeToReachMinimumDelayBetweenRequests = 180;
 
     private float delayBetweenRequestsLowerBound = initialLowerBound;
     private float delayBetweenRequestsUpperBound = initialUpperBound;
-
-    private Color blueOutline = new Color(27 / 255f, 33 / 255f, 114 / 255f, 1);
-    private Color lightBlueOutline = new Color(51 / 255f, 57 / 255f, 132 / 255f, 1);
-    private Color redOutline = new Color(82 / 255f, 1 / 255f, 1 / 255f, 1);
-    private Color lightRedOutline = new Color(117 / 255f, 11 / 255f, 11 / 255f, 1);
-    private Color defaultOutline = new Color(24 / 255f, 24 / 255f, 24 / 255f, 1);
-    private Color blackOutline = Color.black;
 
     // UI Management
 
     [SerializeField] private GameObject requestPrefab;
 
-    [SerializeField] private GameObject HudCanvas;
+    // [SerializeField] private GameObject HudCanvas;
 
     private List<GameObject> hudRequestList;
 
@@ -74,11 +88,13 @@ public class GameManager : MonoBehaviour
 
     private bool gameInProgress = true;
 
+    // METHODS
+
     void Start()
     {
         hearthManager = FindObjectOfType<HearthManager>().GetComponent<HearthManager>();
 
-        HudCanvas = GameObject.Find("HUD");
+        // HudCanvas = GameObject.Find("HUD");
 
         timeSinceLastBlockRequest = 0f;
 
@@ -87,7 +103,7 @@ public class GameManager : MonoBehaviour
 
         playerList = GetRandomPlayers();
 
-        foreach(FactoryEvent f in events)
+        foreach (FactoryEvent f in events)
         {
             StartCoroutine(StartEvent(f));
         }
@@ -98,7 +114,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(factoryEvent.timer);
         factoryEvent.eventToStart.GetComponent<IEvent>().StartEvent();
 
-        if(factoryEvent.loop)
+        if (factoryEvent.loop)
             StartCoroutine(StartEvent(factoryEvent));
     }
 
@@ -107,8 +123,8 @@ public class GameManager : MonoBehaviour
     {
         if (gameInProgress)
         {
-            if(hearthManager.GetCurrentScore() != score) 
-              hearthManager.ScoreChanged(score);
+            // if(hearthManager.GetCurrentScore() != score) 
+            //   hearthManager.ScoreChanged(score);
             DecreaseDominoRequestTimeList();
             CheckForNewDominoRequest();
             DeleteUnsuccessfulDominoRequests();
@@ -212,7 +228,7 @@ public class GameManager : MonoBehaviour
     private void AddDominoRequestToHUD(DominoRequest dominoRequest)
     {
         var requestGameObject = Instantiate(requestPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        requestGameObject.transform.SetParent(HudCanvas.transform, false);
+        // requestGameObject.transform.SetParent(HudCanvas.transform, false);
 
         var requestRectTransform = requestGameObject.GetComponent<RectTransform>();
         requestRectTransform.anchoredPosition = new Vector2(56 + 166 * (dominoRequestList.Count - 1), 0);
@@ -245,175 +261,186 @@ public class GameManager : MonoBehaviour
     {
         var minArea = DominoUtils.GetMinimumDominoArea(domino);
 
-        DominoUtils.PrintDomino(minArea.GetBlocksAsBools());
+        int dominoPixelHeight = (minArea.Blocks.Length + 1) * blockSizeY;
+        int dominoPixelWidth = minArea.Blocks[0].Length * blockSizeX;
 
-        int height = (minArea.Blocks.Length + 1) * 6;
-        int width = minArea.Blocks[0].Length * 7;
+        int dominoPaddingLeft = (int)Mathf.Floor((spriteSize - dominoPixelWidth) / 2);
+        int dominoPaddingBottom = (int)Mathf.Floor((spriteSize - dominoPixelHeight) / 2);
 
         Resources.UnloadUnusedAssets();
-        Color transparentColor = new Color(0, 0, 0, 0);
+        Color transparent = new Color(0, 0, 0, 0);
 
-        var newTexture = new Texture2D(32, 32);
+        var newTexture = new Texture2D(spriteSize, spriteSize);
 
         // INIT BACKGROUND
 
-        for (var x = 0; x < 32; x++)
-            for (var y = 0; y < 32; y++)
-                newTexture.SetPixel(x, y, transparentColor);
+        for (var x = 0; x < spriteSize; x++)
+            for (var y = 0; y < spriteSize; y++)
+                newTexture.SetPixel(x, y, transparent);
 
         // DRAW BLOCKS
 
-        for (var x = 0; x < width; x++)
+        // for (var x = 0; x < dominoPixelWidth; x++)
+        // {
+        //     for (var y = 0; y < dominoPixelHeight; y++)
+        //     {
+        //         int blockXPos = (int) Mathf.Floor(x / blockSizeX);
+        //         int blockYPos = (int) Mathf.Floor(y / blockSizeY);
+
+        //         int xPosInsideCell = x % blockSizeX;
+        //         int yPosInsideCell = y % blockSizeY;
+
+        //         Sprite blockSprite;
+        //         Color pixelColor = transparent;
+
+
+        //         // Draw bottom side
+        //         if (
+        //           blockYPos == minArea.Blocks.Length ||
+        //           blockXPos == minArea.Blocks[blockYPos].Length ||
+        //           !minArea.Blocks[blockYPos][blockXPos].Exists
+        //         )
+        //         {
+        //             var previousBlockYPos = blockYPos - 1;
+
+        //             if (
+        //               previousBlockYPos < 0 ||
+        //               !minArea.Blocks[previousBlockYPos][blockXPos].Exists ||
+        //               yPosInsideCell >= 5 * blockPixelSize
+        //             ) continue;
+
+        //             blockSprite = GetSpriteFromColor(minArea.Blocks[previousBlockYPos][blockXPos].Color);
+
+        //             pixelColor = blockSprite.texture.GetPixel(xPosInsideCell, fullBlockHeight - blockSizeY - 1 - yPosInsideCell);
+        //             if(pixelColor != transparent)
+        //               newTexture.SetPixel(x + dominoPaddingLeft, spriteSize - 1 - dominoPaddingBottom - y, pixelColor);
+
+        //             continue;
+        //         }
+
+
+        //         // Draw bottom side behind current block
+        //         if(yPosInsideCell <= 1 * blockPixelSize) {
+        //             var previousBlockYPos = blockYPos - 1;
+
+        //             if (
+        //               previousBlockYPos < 0 ||
+        //               !minArea.Blocks[previousBlockYPos][blockXPos].Exists
+        //             ) {}
+        //             else {
+        //               blockSprite = GetSpriteFromColor(minArea.Blocks[previousBlockYPos][blockXPos].Color);
+
+        //               pixelColor = blockSprite.texture.GetPixel(xPosInsideCell, fullBlockHeight - blockSizeY - 1 - yPosInsideCell);
+        //               if(pixelColor != transparent)
+        //                 newTexture.SetPixel(x + dominoPaddingLeft, spriteSize - 1 - dominoPaddingBottom - y, pixelColor);
+        //             }
+
+        //         }
+
+        //         blockSprite = GetSpriteFromColor(minArea.Blocks[blockYPos][blockXPos].Color);
+
+        //         pixelColor = blockSprite.texture.GetPixel(xPosInsideCell, fullBlockHeight - 1 - yPosInsideCell);
+        //         if(pixelColor != transparent) 
+        //           newTexture.SetPixel(x + dominoPaddingLeft, spriteSize - 1 - dominoPaddingBottom - y, pixelColor);
+        //     }
+        // }
+
+        for (var blockY = 0; blockY < minArea.Blocks.Length; blockY++)
         {
-            for (var y = 0; y < height; y++)
+            for (var blockX = 0; blockX < minArea.Blocks[blockY].Length; blockX++)
             {
-                int xPosInArray = (int)Mathf.Floor(x / 7);
-                int yPosInArray = (int)Mathf.Floor(y / 6);
 
-                int xPosInsideCell = x % 7;
-                int yPosInsideCell = y % 6;
+                if (!minArea.Blocks[blockY][blockX].Exists) continue;
 
-                Sprite blockSprite;
-                Color pixelColor = transparentColor;
-                Color outlineColor = transparentColor;
+                var blockSprite = GetSpriteFromColor(minArea.Blocks[blockY][blockX].Color);
 
-                if (
-                  yPosInArray == minArea.Blocks.Length ||
-                  xPosInArray == minArea.Blocks[yPosInArray].Length ||
-                  !minArea.Blocks[yPosInArray][xPosInArray].Exists
-                )
+                for (var x = 0; x < blockSizeX; x++)
                 {
-
-                    var previousYPosInArray = yPosInArray - 1;
-
-                    if (
-                      previousYPosInArray < 0 ||
-                      !minArea.Blocks[previousYPosInArray][xPosInArray].Exists ||
-                      yPosInsideCell == 5
-                    ) continue;
-
-                    switch (minArea.Blocks[previousYPosInArray][xPosInArray].Color)
+                    for (var y = 0; y < blockSizeY; y++)
                     {
-                        case BlockColor.Blue:
-                            blockSprite = blueBlockSprite;
-                            break;
-                        case BlockColor.LightBlue:
-                            blockSprite = lightBlueBlockSprite;
-                            break;
-                        case BlockColor.Red:
-                            blockSprite = redBlockSprite;
-                            break;
-                        case BlockColor.LightRed:
-                            blockSprite = lightRedBlockSprite;
-                            break;
-                        case BlockColor.Failed:
-                            blockSprite = blackBlockSprite;
-                            break;
-                        default:
-                            blockSprite = defaultBlockSprite;
-                            break;
+                        var pixelColor = blockSprite.texture.GetPixel(x, fullBlockHeight - 1 - y);
+                        if (pixelColor.a == 0) continue;
+
+                        if (pixelColor.a == 1)
+                            newTexture.SetPixel(x + dominoPaddingLeft + blockX * blockSizeX, spriteSize - 1 - dominoPaddingBottom - blockY * blockSizeY - y, pixelColor);
+                        else
+                        { // if the texture is semi-transparent, we need to merge the colors instead of replacing them
+                            var mergedColor = Color.Lerp(newTexture.GetPixel(x + dominoPaddingLeft + blockX * blockSizeX, spriteSize - 1 - dominoPaddingBottom - blockY * blockSizeY - y), pixelColor, pixelColor.a);
+                            newTexture.SetPixel(x + dominoPaddingLeft + blockX * blockSizeX, spriteSize - 1 - dominoPaddingBottom - blockY * blockSizeY - y, mergedColor);
+                        }
                     }
-
-                    pixelColor = blockSprite.texture.GetPixel(xPosInsideCell, 4 - yPosInsideCell);
-                    newTexture.SetPixel(x + (int)Mathf.Floor((32 - width) / 2), 31 - (int)Mathf.Floor((32 - height) / 2) - y, pixelColor);
-
-                    continue;
                 }
 
-                // DRAW OUTLINE
-
-                switch (minArea.Blocks[yPosInArray][xPosInArray].Color)
+                for (var x = 0; x < blockSizeX; x++)
                 {
-                    case BlockColor.Blue:
-                        blockSprite = blueBlockSprite;
-                        outlineColor = blueOutline;
-                        break;
-                    case BlockColor.LightBlue:
-                        blockSprite = lightBlueBlockSprite;
-                        outlineColor = lightBlueOutline;
-                        break;
-                    case BlockColor.Red:
-                        blockSprite = redBlockSprite;
-                        outlineColor = redOutline;
-                        break;
-                    case BlockColor.LightRed:
-                        blockSprite = lightRedBlockSprite;
-                        outlineColor = lightRedOutline;
-                        break;
-                    case BlockColor.Failed:
-                        blockSprite = blackBlockSprite;
-                        outlineColor = blackOutline;
-                        break;
-                    default:
-                        blockSprite = defaultBlockSprite;
-                        outlineColor = defaultOutline;
-                        break;
+                    for (var y = 0; y < blockSideSize; y++)
+                    {
+                        var pixelColor = blockSprite.texture.GetPixel(x, fullBlockHeight - blockSizeY - 1 - y);
+                        if (pixelColor.a != 0)
+                            newTexture.SetPixel(x + dominoPaddingLeft + blockX * blockSizeX, spriteSize - 1 - dominoPaddingBottom - (blockY + 1) * blockSizeY - y, pixelColor);
+                    }
                 }
-
-
-                var shouldPlaceLeftOutline = xPosInsideCell == 0 && (xPosInArray == 0 || !minArea.Blocks[yPosInArray][xPosInArray - 1].Exists);
-                var shouldPlaceRightOutline = xPosInsideCell == 6 && (xPosInArray == minArea.Blocks[yPosInArray].Length - 1 || !minArea.Blocks[yPosInArray][xPosInArray + 1].Exists);
-                var shouldPlaceTopOutline = yPosInsideCell == 0 && (yPosInArray == 0 || !minArea.Blocks[yPosInArray - 1][xPosInArray].Exists);
-                var shouldPlaceBottomOutline = yPosInsideCell == 5 && (yPosInArray == minArea.Blocks.Length - 1 || !minArea.Blocks[yPosInArray + 1][xPosInArray].Exists);
-
-                if (shouldPlaceLeftOutline)
-                    newTexture.SetPixel(x - 1 + (int)Mathf.Floor((32 - width) / 2), 31 - (int)Mathf.Floor((32 - height) / 2) - y, outlineColor);
-
-                if (shouldPlaceRightOutline)
-                    newTexture.SetPixel(x + 1 + (int)Mathf.Floor((32 - width) / 2), 31 - (int)Mathf.Floor((32 - height) / 2) - y, outlineColor);
-
-                if (shouldPlaceTopOutline)
-                    newTexture.SetPixel(x + (int)Mathf.Floor((32 - width) / 2), 31 - (int)Mathf.Floor((32 - height) / 2) - y + 1, outlineColor);
-
-                if (shouldPlaceBottomOutline)
-                    newTexture.SetPixel(x + (int)Mathf.Floor((32 - width) / 2), 31 - (int)Mathf.Floor((32 - height) / 2) - y - 6, outlineColor);
-
-                if (shouldPlaceTopOutline && shouldPlaceLeftOutline)
-                    newTexture.SetPixel(x - 1 + (int)Mathf.Floor((32 - width) / 2), 31 - (int)Mathf.Floor((32 - height) / 2) - y + 1, outlineColor);
-
-                if (shouldPlaceTopOutline && shouldPlaceRightOutline)
-                    newTexture.SetPixel(x + 1 + (int)Mathf.Floor((32 - width) / 2), 31 - (int)Mathf.Floor((32 - height) / 2) - y + 1, outlineColor);
-
-                if (shouldPlaceBottomOutline && shouldPlaceLeftOutline)
-                    for (var i = 0; i < 6; i++)
-                        newTexture.SetPixel(x - 1 + (int)Mathf.Floor((32 - width) / 2), 31 - (int)Mathf.Floor((32 - height) / 2) - y - 1 - i, outlineColor);
-
-                if (shouldPlaceBottomOutline && shouldPlaceRightOutline)
-                    for (var i = 0; i < 6; i++)
-                        newTexture.SetPixel(x + 1 + (int)Mathf.Floor((32 - width) / 2), 31 - (int)Mathf.Floor((32 - height) / 2) - y - 1 - i, outlineColor);
-
-                // END DRAW OUTLINE
-
-                pixelColor = blockSprite.texture.GetPixel(xPosInsideCell, 10 - yPosInsideCell);
-                newTexture.SetPixel(x + (int)Mathf.Floor((32 - width) / 2), 31 - (int)Mathf.Floor((32 - height) / 2) - y, pixelColor);
             }
         }
+
+        // CONFIG TEXTURE & SPRITE
 
         newTexture.filterMode = FilterMode.Point;
         newTexture.wrapMode = TextureWrapMode.Clamp;
 
         newTexture.Apply();
 
-        var finalSprite = Sprite.Create(newTexture, new Rect(0, 0, 32, 32), new Vector2(0.5f, 0.5f), 32);
+        var finalSprite = Sprite.Create(newTexture, new Rect(0, 0, spriteSize, spriteSize), new Vector2(0.5f, 0.5f), spriteSize);
         finalSprite.name = "DominoSprite";
         return finalSprite;
     }
 
+    private Sprite GetSpriteFromColor(BlockColor color)
+    {
+        switch (color)
+        {
+            case BlockColor.Red:
+                Debug.Log("red");
+                return redBlockSprite;
+            case BlockColor.Green:
+                Debug.Log("green");
+                return greenBlockSprite;
+            case BlockColor.Blue:
+                Debug.Log("blue");
+                return blueBlockSprite;
+            case BlockColor.Purple:
+                Debug.Log("purple");
+                return purpleBlockSprite;
+            case BlockColor.Yellow:
+                Debug.Log("yellow");
+                return yellowBlockSprite;
+            case BlockColor.Cyan:
+                Debug.Log("cyan");
+                return cyanBlockSprite;
+            case BlockColor.Failed:
+                Debug.Log("black");
+                return blackBlockSprite;
+            default:
+                Debug.Log("white");
+                return defaultBlockSprite;
+        }
+    }
+
     private void CalculateNewDurations()
     {
-      var dominoRequestDelta = (initialDominoRequestDuration - minDominoRequestDuration) * Time.fixedDeltaTime / timeToReachMinimumRequestDuration;
-      dominoRequestDuration -= dominoRequestDelta;
+        var dominoRequestDelta = (initialDominoRequestDuration - minDominoRequestDuration) * Time.fixedDeltaTime / timeToReachMinimumRequestDuration;
+        dominoRequestDuration -= dominoRequestDelta;
 
-      var delayBetweenRequestsDelta = (initialUpperBound - minUpperBound) * Time.fixedDeltaTime / timeToReachMinimumDelayBetweenRequests;
-      delayBetweenRequestsUpperBound -= delayBetweenRequestsDelta;
+        var delayBetweenRequestsDelta = (initialUpperBound - minUpperBound) * Time.fixedDeltaTime / timeToReachMinimumDelayBetweenRequests;
+        delayBetweenRequestsUpperBound -= delayBetweenRequestsDelta;
 
-      delayBetweenRequestsDelta = (initialLowerBound - minLowerBound) * Time.fixedDeltaTime / timeToReachMinimumDelayBetweenRequests;
-      delayBetweenRequestsLowerBound -= delayBetweenRequestsDelta;
+        delayBetweenRequestsDelta = (initialLowerBound - minLowerBound) * Time.fixedDeltaTime / timeToReachMinimumDelayBetweenRequests;
+        delayBetweenRequestsLowerBound -= delayBetweenRequestsDelta;
     }
 
     public void GainScore(float result)
     {
-        score += 60 + (int) Mathf.Floor(180 * result);
+        score += 60 + (int)Mathf.Floor(180 * result);
     }
 
     public void LooseScore()

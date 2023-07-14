@@ -22,7 +22,9 @@ public class DominoBehavior : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
 
         if (setRandomDomino)
-            domino = new Domino(DominoUtils.GetRandomValidDomino());
+            domino = new Domino(DominoUtils.GetRandomValidDomino(), DominoUtils.GetRandomColor());
+
+        Debug.Log("Domino: " + domino.Blocks[0][0].Color + "\n" + DominoUtils.PrintDomino(domino.Blocks));
 
         SetSpriteAndCollider();
     }
