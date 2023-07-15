@@ -1099,6 +1099,18 @@ MonoBehaviour:
     m_Y: 648
     m_Width: 702
     m_Height: 108
+  - m_X: 0
+    m_Y: 974
+    m_Width: 1023
+    m_Height: 49
+  - m_X: 72
+    m_Y: 972
+    m_Width: 951
+    m_Height: 51
+  - m_X: 72
+    m_Y: 919
+    m_Width: 35
+    m_Height: 104
   m_fontInfo:
     Name: 
     PointSize: 0

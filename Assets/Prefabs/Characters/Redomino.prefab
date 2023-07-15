@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 1309569765734451676}
   - component: {fileID: 5470309865811309229}
   - component: {fileID: 1448313786891901397}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Redomino
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0025154352, y: 0.051799387}
+  m_Offset: {x: 0, y: 0.1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.05}
@@ -429,5 +429,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6428163, y: 0.39377695}
+  m_Size: {x: 0.6, y: 0.3}
   m_EdgeRadius: 0

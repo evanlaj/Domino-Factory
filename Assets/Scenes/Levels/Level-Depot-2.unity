@@ -1107,6 +1107,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6052526651400815108, guid: 51c122a057ef21946860a2c937e80dac, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: 11e9942271c772545b9ab867db9b57a1, type: 3}
     - target: {fileID: 7009688317925058136, guid: 51c122a057ef21946860a2c937e80dac, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.8
@@ -2438,16 +2442,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: 3
-  dominoRequestDuration: 42
   defaultBlockSprite: {fileID: 21300000, guid: 89c4147dca9d88c428baa4ae3b2ddda7, type: 3}
-  blueBlockSprite: {fileID: 21300000, guid: bc3415bafd98ecb479687cb92541a6c0, type: 3}
-  lightBlueBlockSprite: {fileID: 21300000, guid: 7b64ea3c754285b4aa260bc5ae3ab349, type: 3}
   redBlockSprite: {fileID: 21300000, guid: 024d48a97caf1c042b56f6bebe00fcbc, type: 3}
-  lightRedBlockSprite: {fileID: 21300000, guid: cf5c2f837c9c6c647acc089560f3d235, type: 3}
+  greenBlockSprite: {fileID: 0}
+  blueBlockSprite: {fileID: 21300000, guid: bc3415bafd98ecb479687cb92541a6c0, type: 3}
+  yellowBlockSprite: {fileID: 0}
+  cyanBlockSprite: {fileID: 0}
+  purpleBlockSprite: {fileID: 0}
   blackBlockSprite: {fileID: 21300000, guid: d690eb289aebac9438e4613584260856, type: 3}
   events: []
   requestPrefab: {fileID: 4605496707234032517, guid: cce454a55cf9faa4590868ac5ba86862, type: 3}
-  HudCanvas: {fileID: 1223481943}
 --- !u!4 &1934918453
 Transform:
   m_ObjectHideFlags: 0
