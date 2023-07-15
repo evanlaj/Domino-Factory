@@ -14,10 +14,10 @@ public class RequestBehavior : MonoBehaviour
   
   private DominoRequest dominoRequest;
 
-  private GameManager gameManager;
+  private DominoGenerator dominoGenerator;
   void Start()
   {
-    gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+    dominoGenerator = FindObjectOfType<DominoGenerator>().GetComponent<DominoGenerator>();
     
     timerFill = transform.Find("Timer").GetComponent<Image>();
     playerText = transform.Find("PlayerInfos").GetComponent<TextMeshProUGUI>();
@@ -39,7 +39,7 @@ public class RequestBehavior : MonoBehaviour
     playerText.text = dominoRequest.Player.Name + ", " + dominoRequest.Player.Age + " yo";
 
     var domino = new Domino(dominoRequest.Blocks, dominoRequest.Color);
-    var dominoSprite = gameManager.GenerateDominoSprite(domino);
+    var dominoSprite = dominoGenerator.GenerateDominoSprite(domino);
     dominoImage.sprite = dominoSprite;
 
     while (dominoRequest.RemainingTime >= 0f)

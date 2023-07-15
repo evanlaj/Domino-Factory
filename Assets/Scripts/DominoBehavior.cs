@@ -9,22 +9,18 @@ public class DominoBehavior : MonoBehaviour
     [SerializeField]
     private bool setRandomDomino = false;
 
-    // get own SpriteRenderer
     SpriteRenderer spriteRenderer;
-    GameManager gameManager;
+    DominoGenerator dominoGenerator;
     public Domino domino;
 
     int paintingLayer = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+        dominoGenerator = FindObjectOfType<DominoGenerator>().GetComponent<DominoGenerator>();
 
         if (setRandomDomino)
             domino = new Domino(DominoUtils.GetRandomValidDomino(), DominoUtils.GetRandomColor());
-
-        Debug.Log("Domino: " + domino.Blocks[0][0].Color + "\n" + DominoUtils.PrintDomino(domino.Blocks));
 
         SetSpriteAndCollider();
     }
@@ -50,7 +46,7 @@ public class DominoBehavior : MonoBehaviour
     void SetSpriteAndCollider()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = gameManager.GenerateDominoSprite(domino);
+        spriteRenderer.sprite = dominoGenerator.GenerateDominoSprite(domino);
 
         Sprite sprite = spriteRenderer.sprite;
         BoxCollider2D collider = gameObject.GetComponent<BoxCollider2D>();
