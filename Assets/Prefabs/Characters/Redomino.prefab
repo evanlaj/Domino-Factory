@@ -65,8 +65,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.000000014901161, y: -0.3621308}
-  m_Size: {x: 0.261265, y: 0.7811571}
+  m_Offset: {x: 0, y: -0.25}
+  m_Size: {x: 0.6, y: 0.75}
   m_Direction: 0
 --- !u!58 &2722529476702274203
 CircleCollider2D:
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectCarriedDistanceFactor: 0.6
-  offsetObjectCarriedDistance: {x: 0, y: 0, z: 0}
+  offsetObjectCarriedDistance: {x: 0, y: 0.3, z: 0}
   speed: 4
   dashSpeed: 8
   dashDuration: 0.2

@@ -316,6 +316,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Redomino
       objectReference: {fileID: 0}
+    - target: {fileID: 2593460607943264298, guid: bd43d55db6dc5fa4dbaeca9be6f8a11d, type: 3}
+      propertyPath: m_Size.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2593460607943264298, guid: bd43d55db6dc5fa4dbaeca9be6f8a11d, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
