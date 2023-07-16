@@ -8,93 +8,100 @@ namespace Utils
 {
   public class DominoUtils
   {
-    #region Dominos
+      #region Dominos
 
-    public static readonly bool[][] Skew = new bool[][] {
-      new bool[] {  true, false, false, false },
-      new bool[] {  true,  true, false, false },
-      new bool[] { false,  true, false, false },
-      new bool[] { false, false, false, false }
-    };
+      public static readonly bool[][] Skew = new bool[][] {
+        new bool[] {  true, false, false, false },
+        new bool[] {  true,  true, false, false },
+        new bool[] { false,  true, false, false },
+        new bool[] { false, false, false, false }
+      };
 
-    public static readonly bool[][] ReverseSkew = new bool[][] {
-      new bool[] { false,  true, false, false },
-      new bool[] {  true,  true, false, false },
-      new bool[] {  true, false, false, false },
-      new bool[] { false, false, false, false }
-    };
+      public static readonly bool[][] ReverseSkew = new bool[][] {
+        new bool[] { false,  true, false, false },
+        new bool[] {  true,  true, false, false },
+        new bool[] {  true, false, false, false },
+        new bool[] { false, false, false, false }
+      };
 
-    public static readonly bool[][] Square = new bool[][] {
-      new bool[] {  true,  true, false, false },
-      new bool[] {  true,  true, false, false },
-      new bool[] { false, false, false, false },
-      new bool[] { false, false, false, false }
-    };
+      public static readonly bool[][] Square = new bool[][] {
+        new bool[] {  true,  true, false, false },
+        new bool[] {  true,  true, false, false },
+        new bool[] { false, false, false, false },
+        new bool[] { false, false, false, false }
+      };
 
-    public static readonly bool[][] L = new bool[][] {
-      new bool[] {  true, false, false, false },
-      new bool[] {  true, false, false, false },
-      new bool[] {  true,  true, false, false },
-      new bool[] { false, false, false, false }
-    };
+      public static readonly bool[][] L = new bool[][] {
+        new bool[] {  true, false, false, false },
+        new bool[] {  true, false, false, false },
+        new bool[] {  true,  true, false, false },
+        new bool[] { false, false, false, false }
+      };
 
-    public static readonly bool[][] ReverseL = new bool[][] {
-      new bool[] { false,  true, false, false },
-      new bool[] { false,  true, false, false },
-      new bool[] {  true,  true, false, false },
-      new bool[] { false, false, false, false }
-    };
+      public static readonly bool[][] ReverseL = new bool[][] {
+        new bool[] { false,  true, false, false },
+        new bool[] { false,  true, false, false },
+        new bool[] {  true,  true, false, false },
+        new bool[] { false, false, false, false }
+      };
 
-    public static readonly bool[][] T = new bool[][] {
-      new bool[] {  true, false, false, false },
-      new bool[] {  true,  true, false, false },
-      new bool[] {  true, false, false, false },
-      new bool[] { false, false, false, false }
-    };
+      public static readonly bool[][] T = new bool[][] {
+        new bool[] {  true, false, false, false },
+        new bool[] {  true,  true, false, false },
+        new bool[] {  true, false, false, false },
+        new bool[] { false, false, false, false }
+      };
 
-    public static readonly bool[][] Line = new bool[][] {
-      new bool[] {  true, false, false, false },
-      new bool[] {  true, false, false, false },
-      new bool[] {  true, false, false, false },
-      new bool[] {  true, false, false, false }
-    };
+      public static readonly bool[][] Line = new bool[][] {
+        new bool[] {  true, false, false, false },
+        new bool[] {  true, false, false, false },
+        new bool[] {  true, false, false, false },
+        new bool[] {  true, false, false, false }
+      };
 
-    public static readonly bool[][][] ValidDomino = new bool[][][] {
-      Skew,
-      ReverseSkew,
-      Square,
-      L,
-      ReverseL,
-      T,
-      Line
-    };
+      public static readonly bool[][][] ValidDomino = new bool[][][] {
+        Skew,
+        ReverseSkew,
+        Square,
+        L,
+        ReverseL,
+        T,
+        Line
+      };
 
-    public static readonly bool[][] SingleBlock = new bool[][] {
-      new bool[] {  true, false, false, false },
-      new bool[] { false, false, false, false },
-      new bool[] { false, false, false, false },
-      new bool[] { false, false, false, false }
-    };
+      public static readonly bool[][] SingleBlock = new bool[][] {
+        new bool[] {  true, false, false, false },
+        new bool[] { false, false, false, false },
+        new bool[] { false, false, false, false },
+        new bool[] { false, false, false, false }
+      };
 
-    public static readonly bool[][] DoubleBlock = new bool[][] {
-      new bool[] {  true, false, false, false },
-      new bool[] {  true, false, false, false },
-      new bool[] { false, false, false, false },
-      new bool[] { false, false, false, false }
-    };
+      public static readonly bool[][] DoubleBlock = new bool[][] {
+        new bool[] {  true, false, false, false },
+        new bool[] {  true, false, false, false },
+        new bool[] { false, false, false, false },
+        new bool[] { false, false, false, false }
+      };
 
-    public static readonly bool[][] TripleBlock = new bool[][] {
-      new bool[] {  true, false, false, false },
-      new bool[] {  true,  true, false, false },
-      new bool[] { false, false, false, false },
-      new bool[] { false, false, false, false }
-    };
+      public static readonly bool[][] TripleBlock = new bool[][] {
+        new bool[] {  true, false, false, false },
+        new bool[] {  true,  true, false, false },
+        new bool[] { false, false, false, false },
+        new bool[] { false, false, false, false }
+      };
 
-    public static readonly bool[][][] DominoPieces = new bool[][][] {
-      SingleBlock,
-      DoubleBlock,
-      TripleBlock
-    };
+      public static readonly bool[][][] DominoPieces = new bool[][][] {
+        SingleBlock,
+        DoubleBlock,
+        TripleBlock
+      };
+
+      public static readonly bool[][] None = new bool[][] {
+        new bool[] { false, false, false, false },
+        new bool[] { false, false, false, false },
+        new bool[] { false, false, false, false },
+        new bool[] { false, false, false, false }
+      };
 
         #endregion
 
