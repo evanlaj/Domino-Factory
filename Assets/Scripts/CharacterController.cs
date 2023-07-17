@@ -198,57 +198,56 @@ public class CharacterController : MonoBehaviour
 
     public void Interact(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (!ctx.performed) return;
+
+        if (IsInAssembler)
         {
-            if (IsInAssembler)
+            // TODO : Move logic to assembler
+            var domino = objectCarried.GetComponent<DominoBehavior>().domino;
+            if (assemblerManager.CanAddDomino(domino))
             {
-                var domino = objectCarried.GetComponent<DominoBehavior>().domino;
-                if (assemblerManager.CanAddDomino(domino))
-                {
-                    assemblerManager.AddDomino(domino);
-                    objectCarried.gameObject.SetActive(false);
-                    objectCarried = null;
-                    IsInAssembler = false;
-                }
-            }
-            else
-            {
-                var interactableObjectsNear = GetColliderAroundPlayerOrderByDistance(getTriggerCollider: true);
-                var interactableObjectsInFront = GetColliderInFrontPlayerOrderByDistance();
-
-                //Si le joueur à un objet il va le déposer
-                if (objectCarried != null)
-                {
-                    if (interactableObjectsNear.Any(o => o.transform.CompareTag("AssemblerButton")))
-                    {
-                        var domino = objectCarried.GetComponent<DominoBehavior>();
-                        assemblerManager.CreateSpriteForAddedDomino(domino.domino);
-
-                        objectCarried.position = new Vector3(100, 100);
-                        IsInAssembler = true;
-                    }
-                    else
-                    {
-                        DropObject();
-                    }
-                }
-                //Sinon il va tenter d'en attraper un
-                else
-                {
-                    if ((interactableObjectsNear.Any(o => o.transform.CompareTag("Assembler")) || interactableObjectsInFront.Any(o => o.transform.CompareTag("Assembler"))) && !assemblerManager.IsEmpty())
-                    {
-                        objectCarried = assemblerManager.GetDomino().transform;
-                        objectCarried.GetComponent<Collider2D>().isTrigger = true;
-                    }
-                    else
-                    {
-                        GetObjectNear();
-                    }
-                }
-
+                assemblerManager.AddDomino(domino);
+                objectCarried.gameObject.SetActive(false);
+                objectCarried = null;
+                IsInAssembler = false;
             }
         }
+        else
+        {
+            var interactableObjectsNear = GetColliderAroundPlayerOrderByDistance(getTriggerCollider: true);
+            var interactableObjectsInFront = GetColliderInFrontPlayerOrderByDistance();
 
+            //Si le joueur à un objet il va le déposer
+            if (objectCarried != null)
+            {
+                if (interactableObjectsNear.Any(o => o.transform.CompareTag("AssemblerButton")))
+                {
+                    var domino = objectCarried.GetComponent<DominoBehavior>();
+                    assemblerManager.CreateSpriteForAddedDomino(domino.domino);
+
+                    objectCarried.position = new Vector3(100, 100);
+                    IsInAssembler = true;
+                }
+                else
+                {
+                    DropObject();
+                }
+            }
+            //Sinon il va tenter d'en attraper un
+            else
+            {
+                if ((interactableObjectsNear.Any(o => o.transform.CompareTag("Assembler")) || interactableObjectsInFront.Any(o => o.transform.CompareTag("Assembler"))) && !assemblerManager.IsEmpty())
+                {
+                    objectCarried = assemblerManager.GetDomino().transform;
+                    objectCarried.GetComponent<Collider2D>().isTrigger = true;
+                }
+                else
+                {
+                    GetObjectNear();
+                }
+            }
+
+        }
     }
 
 
@@ -480,7 +479,7 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    //Todo : a passer dans une autre classe ?
+    //Todo : a passer dans une autre classe ? Oui 👍
     public void LoadChooseLevel(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
