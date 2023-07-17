@@ -16,7 +16,7 @@ public class DominoGenerator : MonoBehaviour
     [SerializeField] private Sprite purpleBlockSprite;
     [SerializeField] private Sprite blackBlockSprite;
 
-    private static readonly int spriteSize = 512;
+    private static readonly int spriteSize = 256;
     private static readonly uint spritePadding = (uint) Mathf.Floor(1.25f*(spriteSize/32));
     private static readonly int blockPixelSize = spriteSize/32;
     private static readonly int blockSizeY = 6 * blockPixelSize;
