@@ -155,12 +155,16 @@ namespace Utils
             int minRow = 10000;
             int maxRow = 0;
 
+            bool exists = false;
+
             for (int row = 0; row < domino.Blocks.Length; row++)
             {
                 for (int col = 0; col < domino.Blocks[row].Length; col++)
                 {
                     if (domino.Blocks[row][col].Exists)
                     {
+                        exists = true;
+
                         if (row < minRow) minRow = row;
                         if (row > maxRow) maxRow = row;
 
@@ -169,6 +173,9 @@ namespace Utils
                     }
                 }
             }
+
+            if (!exists) 
+                return new Domino(None);
 
             Block[][] minimumDominoArea = new Block[maxRow - minRow + 1][];
 

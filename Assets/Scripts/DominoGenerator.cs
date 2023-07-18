@@ -25,9 +25,9 @@ public class DominoGenerator : MonoBehaviour
     private static readonly int blockSideSize = 5 * blockPixelSize;
     private static readonly int fullBlockHeight = blockSizeY + blockSideSize;
 
-    public Sprite GenerateDominoSprite(Domino domino)
+    public Sprite GenerateDominoSprite(Domino domino, bool centerSprite = true)
     {   
-        var minArea = DominoUtils.GetMinimumDominoArea(domino);
+        var minArea = centerSprite ? DominoUtils.GetMinimumDominoArea(domino): domino;
 
         int dominoPixelHeight = (minArea.Blocks.Length + 1) * blockSizeY;
         int dominoPixelWidth = minArea.Blocks[0].Length * blockSizeX;
