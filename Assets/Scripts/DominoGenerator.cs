@@ -49,6 +49,13 @@ public class DominoGenerator : MonoBehaviour
 
         newTexture.SetPixels32(pixelArray);
 
+        // CONFIG TEXTURE & SPRITE
+
+        newTexture.filterMode = FilterMode.Point;
+        newTexture.wrapMode = TextureWrapMode.Clamp;
+
+        newTexture.Apply();
+
         // DRAW BLOCKS
 
         for (var blockY = 0; blockY < minArea.Blocks.Length; blockY++) {
@@ -63,13 +70,6 @@ public class DominoGenerator : MonoBehaviour
                 Graphics.CopyTexture(blockSprite.texture, 0, 0, 0, 0, blockSizeX, fullBlockHeight, newTexture, 0, 0, posX, posY);
             }
         }
-
-        // CONFIG TEXTURE & SPRITE
-
-        newTexture.filterMode = FilterMode.Point;
-        newTexture.wrapMode = TextureWrapMode.Clamp;
-
-        newTexture.Apply();
 
         var finalSprite = Sprite.Create(newTexture, new Rect(0, 0, spriteSize, spriteSize), new Vector2(0.5f, 0.5f), spriteSize, spritePadding, SpriteMeshType.Tight);
         finalSprite.name = "DominoSprite";
