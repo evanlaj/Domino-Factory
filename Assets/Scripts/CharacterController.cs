@@ -20,7 +20,6 @@ public class CharacterController : MonoBehaviour
     float dashTimer;
 
     bool IsInAssembler;
-    bool alreadyMoveInAssembler;
 
     Transform interactTriggerZone;
     Vector2 movement = Vector2.zero;
@@ -37,6 +36,9 @@ public class CharacterController : MonoBehaviour
     [SerializeField] float dashDuration;
     [SerializeField] float dashCooldown;
 
+    [SerializeField] float delayBetweenInput;
+    float timeSinceLastInput;
+
     void Start()
     {
         rigidbodyCharacter = GetComponent<Rigidbody2D>();
@@ -51,9 +53,36 @@ public class CharacterController : MonoBehaviour
 
     void FixedUpdate()
     {
+        timeSinceLastInput += Time.deltaTime;
+
         if (IsInAssembler)
         {
+            //Pour les déplacement dans l'assembleur, on ajoute un délai entre chaque input pour éviter le spamme du bouton
+            if (movement != Vector2.zero && timeSinceLastInput >= delayBetweenInput)
+            {
+                timeSinceLastInput = 0;
 
+                var domino = objectCarried.GetComponent<DominoBehavior>();
+
+                if (movement.normalized.x > 0.8)
+                {
+                    domino.MoveDominoRight();
+                }
+                else if (movement.normalized.x < -0.8)
+                {
+                    domino.MoveDominoLeft();
+                }
+                else if (movement.normalized.y < 0)
+                {
+                    domino.MoveDominoDown();
+                }
+                else if (movement.normalized.y > 0)
+                {
+                    domino.MoveDominoUp();
+                }
+
+                assemblerManager.CreateSpriteForAddedDomino(domino.domino);
+            }
         }
         else
         {
@@ -104,9 +133,7 @@ public class CharacterController : MonoBehaviour
 
                     interactTriggerZone.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.down, lastDirection));
                     rigidbodyCharacter.MovePosition(rigidbodyCharacter.position + speed * Time.deltaTime * movement);
-
                 }
-
             }
 
             animator.SetBool("isMovingSide", isMovingSide);
@@ -134,11 +161,22 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+
     #region InputAction CallBack
     public void Move(InputAction.CallbackContext ctx)
     {
-        movement = ctx.ReadValue<Vector2>();
+        if (ctx.performed)
+        {
+            movement = ctx.ReadValue<Vector2>();
+        }
+        //Dans le cas ou le joueur est dans l'assembleur, on l'autorise à spammer les boutons de directions pour aller plus vites plutot que maintenir le bouton
+        else if (ctx.canceled)
+        {
+            movement = Vector2.zero;
+            timeSinceLastInput = delayBetweenInput;
+        }
     }
+
     public void Dash(InputAction.CallbackContext ctx)
     {
         if (ctx.performed && canDash)
@@ -167,7 +205,7 @@ public class CharacterController : MonoBehaviour
             }
             else
             {
-                var interactableObjectsNear = GetColliderAroundPlayerOrderByDistance(getTriggerCollider : true);
+                var interactableObjectsNear = GetColliderAroundPlayerOrderByDistance(getTriggerCollider: true);
                 var interactableObjectsInFront = GetColliderInFrontPlayerOrderByDistance();
 
                 //Si le joueur à un objet il va le déposer
@@ -205,47 +243,6 @@ public class CharacterController : MonoBehaviour
 
     }
 
-    public void MoveDominosInAssembler(InputAction.CallbackContext ctx)
-    {
-
-        if (ctx.performed)
-        {
-
-            if (IsInAssembler && !alreadyMoveInAssembler)
-            {
-                alreadyMoveInAssembler = true;
-
-                var domino = objectCarried.GetComponent<DominoBehavior>();
-
-                Vector2 movement = ctx.ReadValue<Vector2>();
-
-                if (movement.x > 0.5)
-                {
-                    domino.MoveDominoRight();
-                }
-                else if (movement.x < -0.5)
-                {
-                    domino.MoveDominoLeft();
-                }
-                else if (movement.y < 0)
-                {
-                    domino.MoveDominoDown();
-                }
-                else if (movement.y > 0)
-                {
-                    domino.MoveDominoUp();
-                }
-
-                assemblerManager.CreateSpriteForAddedDomino(domino.domino);
-            }
-
-        }
-        else if (ctx.canceled)
-        {
-            alreadyMoveInAssembler = false;
-        }
-
-    }
 
     public void RotateClockwise(InputAction.CallbackContext ctx)
     {
@@ -298,7 +295,7 @@ public class CharacterController : MonoBehaviour
 
         //Sinon on essaie de prendre un bloc d'une table
         TableBehaviour tableBehaviour = GetFirstTableWithObject(interactableObjects);
-        if(tableBehaviour != null)
+        if (tableBehaviour != null)
         {
             objectCarried = tableBehaviour.GetObjectCarried();
             return;
@@ -437,7 +434,7 @@ public class CharacterController : MonoBehaviour
     }
 
     #endregion
-   
+
     void UpdateOutlines()
     {
         IEnumerable<Collider2D> interactableObjects = GetColliderInFrontPlayerOrderByDistance();

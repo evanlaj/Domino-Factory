@@ -10,8 +10,11 @@ public class SelectMenuController : MonoBehaviour
     List<Transform> buttons;
     int index = 0;
 
-    Color selectedColor = Color.cyan;
+    [SerializeField] Color selectedColor = Color.cyan;
     Color defaultColor = Color.white;
+
+    [SerializeField] float delayBetweenInputs = 0.2f;
+    float timeSinceLastInput = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -50,18 +53,34 @@ public class SelectMenuController : MonoBehaviour
         }
     }
 
+    Vector2 currentMovement = Vector2.zero;
 
     public void ChangeSelectMenu(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
-            Vector2 movement = ctx.ReadValue<Vector2>();
+            currentMovement = ctx.ReadValue<Vector2>();
+        }
+        else if (ctx.canceled)
+        {
+            currentMovement = Vector2.zero;
+            timeSinceLastInput = delayBetweenInputs;
+        }
+    }
 
-            if (movement.x > 0.5)
+    void Update()
+    {
+        timeSinceLastInput += Time.deltaTime;
+
+        if (currentMovement != Vector2.zero && timeSinceLastInput >= delayBetweenInputs)
+        {
+            timeSinceLastInput = 0;
+
+            if (currentMovement.x > 0.5)
             {
                 Previous();
             }
-            else if (movement.x < -0.5)
+            else if (currentMovement.x < -0.5)
             {
                 Next();
             }

@@ -323,10 +323,6 @@ MonoBehaviour:
     m_ActionId: a305a07a-b774-4161-b729-2fb6f82ff897
     m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/XInputControllerWindows/leftStick,/XInputControllerWindows/dpad/up,/XInputControllerWindows/dpad/down,/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/right]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 184d9971-732e-45e9-8687-5b7045820ad5
-    m_ActionName: Player/Selection[/XInputControllerWindows/leftStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/dpad/up,/XInputControllerWindows/dpad/down,/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/right,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 905507836160884252}
         m_TargetAssemblyTypeName: ChooseCharacterIndividual, Assembly-CSharp
@@ -377,6 +373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightArrow: {fileID: 0}
   leftArrow: {fileID: 0}
+  delayBetweenInput: 0.4
   manager: {fileID: 0}
 --- !u!1 &8033978180804777041
 GameObject:

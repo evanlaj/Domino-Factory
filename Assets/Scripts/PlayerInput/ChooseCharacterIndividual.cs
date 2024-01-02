@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,6 +6,8 @@ public class ChooseCharacterIndividual : MonoBehaviour
 {
     [SerializeField] Transform rightArrow;
     [SerializeField] Transform leftArrow;
+    [SerializeField] float delayBetweenInput = 0.15f;
+    float timeSinceLastInput = 0;
 
     public PlayerJoinedManager manager;
 
@@ -17,6 +20,8 @@ public class ChooseCharacterIndividual : MonoBehaviour
     bool selectionValidated;
 
     bool objectCompletlyCreated;
+
+    Vector2 movement = Vector2.zero;
 
     // Todo � remplacer par soit un changement de sprite / Soit un changement d'animator
     Color[] colors = new Color[] { Color.red, Color.blue, Color.green, Color.gray, Color.cyan, Color.magenta };
@@ -39,30 +44,14 @@ public class ChooseCharacterIndividual : MonoBehaviour
 
     public void SelectCharacter(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !selectionValidated && objectCompletlyCreated)
+        if (ctx.performed)
         {
-            Vector2 movement = ctx.ReadValue<Vector2>();
-            if (movement == Vector2.left)
-            {
-                animatorLeftArrow.SetTrigger("Select");
-                selectedColorIndex--;
-                if (selectedColorIndex < 0)
-                {
-                    selectedColorIndex = colors.Length - 1;
-                }
-                characterSprite.color = colors[selectedColorIndex];
-
-            }
-            else if (movement == Vector2.right)
-            {
-                animatorRightArrow.SetTrigger("Select");
-                selectedColorIndex++;
-                if (selectedColorIndex >= colors.Length)
-                {
-                    selectedColorIndex = 0;
-                }
-                characterSprite.color = colors[selectedColorIndex];
-            }
+            movement = ctx.ReadValue<Vector2>().normalized;
+        }
+        else if (ctx.canceled)
+        {
+            movement = Vector2.zero;
+            timeSinceLastInput = delayBetweenInput;
         }
     }
 
@@ -77,6 +66,37 @@ public class ChooseCharacterIndividual : MonoBehaviour
             selectionValidated = true;
 
             manager.PlayerValidate(GetComponent<PlayerInput>().playerIndex, colors[selectedColorIndex]);
+        }
+    }
+
+    void Update()
+    {
+        timeSinceLastInput += Time.deltaTime;
+
+        if (movement != Vector2.zero && timeSinceLastInput >= delayBetweenInput && !selectionValidated && objectCompletlyCreated)
+        {
+            timeSinceLastInput = 0;
+            if (movement.x < -0.5)
+            {
+                animatorLeftArrow.SetTrigger("Select");
+                selectedColorIndex--;
+                if (selectedColorIndex < 0)
+                {
+                    selectedColorIndex = colors.Length - 1;
+                }
+                characterSprite.color = colors[selectedColorIndex];
+
+            }
+            else if (movement.x > 0.5)
+            {
+                animatorRightArrow.SetTrigger("Select");
+                selectedColorIndex++;
+                if (selectedColorIndex >= colors.Length)
+                {
+                    selectedColorIndex = 0;
+                }
+                characterSprite.color = colors[selectedColorIndex];
+            }
         }
     }
 
