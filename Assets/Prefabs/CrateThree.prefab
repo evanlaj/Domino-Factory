@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8322353147495768488}
   m_Layer: 0
   m_Name: CrateThree
-  m_TagString: Box
+  m_TagString: Crate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 1386827367230174793}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6469271216470933113
 SpriteRenderer:
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 314176208544013717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac29464398235044c977dfda8910e4d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 4567c06e5e32ab84f9ec4c8d52b5ef47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dominoPrefab: {fileID: 7219504624182366524, guid: b84fd55a10e93284abd66c1f2caec2d0, type: 3}
@@ -163,12 +163,16 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8868723883272715309, guid: 13f4529c245dfbd498d11e4dc77a35d7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868723883272715309, guid: 13f4529c245dfbd498d11e4dc77a35d7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8868723883272715309, guid: 13f4529c245dfbd498d11e4dc77a35d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.153
       objectReference: {fileID: 0}
     - target: {fileID: 8868723883272715309, guid: 13f4529c245dfbd498d11e4dc77a35d7, type: 3}
       propertyPath: m_LocalPosition.z

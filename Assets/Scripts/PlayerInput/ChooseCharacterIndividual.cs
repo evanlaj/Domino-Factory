@@ -6,7 +6,7 @@ public class ChooseCharacterIndividual : MonoBehaviour
     [SerializeField] Transform rightArrow;
     [SerializeField] Transform leftArrow;
 
-    public PlayerCharactersManager manager;
+    public PlayerJoinedManager manager;
 
     SpriteRenderer characterSprite;
     SpriteRenderer checkSprite;
@@ -18,7 +18,7 @@ public class ChooseCharacterIndividual : MonoBehaviour
 
     bool objectCompletlyCreated;
 
-    // Todo à remplacer par soit un changement de sprite / Soit un changement d'animator
+    // Todo ï¿½ remplacer par soit un changement de sprite / Soit un changement d'animator
     Color[] colors = new Color[] { Color.red, Color.blue, Color.green, Color.gray, Color.cyan, Color.magenta };
 
     int selectedColorIndex = 0;
@@ -46,7 +46,7 @@ public class ChooseCharacterIndividual : MonoBehaviour
             {
                 animatorLeftArrow.SetTrigger("Select");
                 selectedColorIndex--;
-                if(selectedColorIndex < 0)
+                if (selectedColorIndex < 0)
                 {
                     selectedColorIndex = colors.Length - 1;
                 }
