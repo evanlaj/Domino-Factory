@@ -6,10 +6,16 @@ namespace Enums
     {
         None,
         Failed,
-        LightRed,
         Red,
+        Green,
+        Blue,
+        Purple,
+        Yellow,
+        Cyan,
+
+        // Not used
         LightBlue,
-        Blue
+        LightRed,
     }
 }
 

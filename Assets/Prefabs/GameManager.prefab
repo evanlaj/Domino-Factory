@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6253994091831789196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1656457489477446744}
+  - component: {fileID: 631662538104172525}
+  - component: {fileID: 8299502321885014365}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1656457489477446744
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6253994091831789196}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &631662538104172525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6253994091831789196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020a072a2a82693448501c64ea861f2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 3
+  dominoRequestDuration: 40
+  requestPrefab: {fileID: 4605496707234032517, guid: cce454a55cf9faa4590868ac5ba86862, type: 3}
+  events: []
+--- !u!114 &8299502321885014365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6253994091831789196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfba2ee385e91343ae05b2534fda846, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultBlockSprite: {fileID: 21300000, guid: 634b4215386e2db4ba5ec9525332b3d2, type: 3}
+  redBlockSprite: {fileID: 21300000, guid: b0ca5af74aa4f304e83ed1d99f8d39eb, type: 3}
+  greenBlockSprite: {fileID: 21300000, guid: 43d1a56163e200c42a26fc3dabedb601, type: 3}
+  blueBlockSprite: {fileID: 21300000, guid: da7a09e77df6f774b9e0fb94bc398555, type: 3}
+  yellowBlockSprite: {fileID: 21300000, guid: 3e5fe7493dcba8045b52ec17abbe167d, type: 3}
+  cyanBlockSprite: {fileID: 21300000, guid: 76382846df4441c40a8f57aa18552d22, type: 3}
+  purpleBlockSprite: {fileID: 21300000, guid: d206282a52bc9d4499252d3f3ebf4582, type: 3}
+  blackBlockSprite: {fileID: 21300000, guid: 4249c85b98f0d684489f376fc871a1c7, type: 3}
