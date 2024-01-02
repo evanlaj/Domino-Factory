@@ -41,6 +41,8 @@ public class CharacterController : MonoBehaviour
     [SerializeField] float delayBetweenInput;
     float timeSinceLastInput;
 
+    bool IsInAssembler => assemblerHologram != null;
+
     void Start()
     {
         rigidbodyCharacter = GetComponent<Rigidbody2D>();
@@ -94,7 +96,7 @@ public class CharacterController : MonoBehaviour
                 domino.MoveDominoUp();
             }
 
-            assemblerManager.CreateSpriteForAddedDomino(domino.domino);
+            assemblerHologram.SetDomino(domino.domino);
         }
     }
 
@@ -167,319 +169,320 @@ public class CharacterController : MonoBehaviour
 
             }
         }
+    }
 
 
-        #region InputAction CallBack
-        public void Move(InputAction.CallbackContext ctx)
+    #region InputAction CallBack
+    public void Move(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
         {
-            if (ctx.performed)
-            {
-                movement = ctx.ReadValue<Vector2>();
-            }
-            //Dans le cas ou le joueur est dans l'assembleur, on l'autorise à spammer les boutons de directions pour aller plus vites plutot que maintenir le bouton
-            else if (ctx.canceled)
-            {
-                movement = Vector2.zero;
-                timeSinceLastInput = delayBetweenInput;
-            }
+            movement = ctx.ReadValue<Vector2>();
         }
-
-        public void Dash(InputAction.CallbackContext ctx)
+        //Dans le cas ou le joueur est dans l'assembleur, on l'autorise à spammer les boutons de directions pour aller plus vites plutot que maintenir le bouton
+        else if (ctx.canceled)
         {
-            if (ctx.performed && canDash)
-            {
-                CameraShake.Instance.LittleShake();
-                canDash = false;
-                isDashing = true;
-                dashTimer = 0f;
-            }
+            movement = Vector2.zero;
+            timeSinceLastInput = delayBetweenInput;
         }
+    }
 
-        public void Interact(InputAction.CallbackContext ctx)
+    public void Dash(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed && canDash)
         {
-            if (!ctx.performed) return;
+            CameraShake.Instance.LittleShake();
+            canDash = false;
+            isDashing = true;
+            dashTimer = 0f;
+        }
+    }
 
-            if (assemblerHologram != null)
+    public void Interact(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+
+        if (IsInAssembler)
+        {
+            QuitAssemblerAndInsertDomino();
+        }
+        else
+        {
+            var interactableObjectsNear = GetColliderAroundPlayerOrderByDistance(getTriggerCollider: true);
+            var interactableObjectsInFront = GetColliderInFrontPlayerOrderByDistance();
+
+            //Si le joueur à un objet il va le déposer
+            if (objectCarried != null)
             {
-                QuitAssemblerAndInsertDomino();
+                if (interactableObjectsNear.Any(o => o.transform.CompareTag("AssemblerButton")))
+                    AddHologramToAssembler();
+                else
+                    DropObject();
             }
+            //Sinon il va tenter d'en attraper un
             else
             {
-                var interactableObjectsNear = GetColliderAroundPlayerOrderByDistance(getTriggerCollider: true);
-                var interactableObjectsInFront = GetColliderInFrontPlayerOrderByDistance();
-
-                //Si le joueur à un objet il va le déposer
-                if (objectCarried != null)
+                if ((interactableObjectsNear.Any(o => o.transform.CompareTag("Assembler")) || interactableObjectsInFront.Any(o => o.transform.CompareTag("Assembler"))) && !assembler.IsEmpty())
                 {
-                    if (interactibleObjectsNear.Any(o => o.transform.CompareTag("AssemblerButton")))
-                        AddHologramToAssembler();
-                    else
-                        DropObject();
+                    objectCarried = assembler.TakeDominoOut().transform;
+                    objectCarried.GetComponent<Collider2D>().isTrigger = true;
                 }
-                //Sinon il va tenter d'en attraper un
                 else
                 {
-                    if ((interactibleObjectsNear.Any(o => o.transform.CompareTag("Assembler")) || interactibleObjectsInFront.Any(o => o.transform.CompareTag("Assembler"))) && !assembler.IsEmpty())
-                    {
-                        objectCarried = assembler.TakeDominoOut().transform;
-                        objectCarried.GetComponent<Collider2D>().isTrigger = true;
-                    }
-                    else
-                    {
-                        GetObjectNear();
-                    }
-                }
-
-            }
-        }
-
-
-        public void RotateClockwise(InputAction.CallbackContext ctx)
-        {
-            if (!ctx.performed) return;
-            RotateDomino(true);
-        }
-
-        public void RotateCounterClockwise(InputAction.CallbackContext ctx)
-        {
-            if (!ctx.performed) return;
-            RotateDomino(false);
-        }
-
-        private void RotateDomino(bool clockwise)
-        {
-            if (objectCarried == null) return;
-
-            var domino = objectCarried.GetComponent<DominoBehavior>();
-
-            if (clockwise) domino.RotateDominoClockwise();
-            else domino.RotateDominoCounterClockwise();
-
-            if (assemblerHologram != null) assemblerHologram.SetDomino(domino.domino);
-        }
-
-        #endregion
-
-        #region Interact with object utils functions
-        void GetObjectNear()
-        {
-            IEnumerable<Collider2D> interactableObjects = GetColliderInFrontPlayerOrderByDistance();
-
-            Collider2D block = GetNearestObjectInCollidersByTag(interactableObjects, "Blocks");
-
-            //D'abord on vérifie si on peut prendre un bloc devant nous
-            if (block != null)
-            {
-                block.isTrigger = true;
-                objectCarried = block.transform;
-                return;
-            }
-
-            //Sinon on essaie de prendre un bloc d'une table
-            TableBehaviour tableBehaviour = GetFirstTableWithObject(interactableObjects);
-            if (tableBehaviour != null)
-            {
-                objectCarried = tableBehaviour.GetObjectCarried();
-                return;
-            }
-
-            Collider2D box = GetNearestObjectInCollidersByTag(interactableObjects, "Crate");
-            if (box != null)
-            {
-                CrateBehaviour boxBehaviour = box.GetComponent<CrateBehaviour>();
-                objectCarried = boxBehaviour.GetObject();
-                return;
-            }
-
-
-            //Dans le dernier cas on vérifie si on ne peux pas récupérer un bloc proche autour du joueur
-            Collider2D blockAroundPlayer = GetNearestObjectInCollidersByTag(interactableObjects, "Blocks");
-            if (blockAroundPlayer != null)
-            {
-                blockAroundPlayer.isTrigger = true;
-                objectCarried = blockAroundPlayer.transform;
-            }
-
-        }
-
-        private void AddHologramToAssembler()
-        {
-            var domino = objectCarried.GetComponent<DominoBehavior>();
-            assemblerHologram = assembler.AddHologram(domino.domino);
-        }
-
-        private void QuitAssemblerAndInsertDomino()
-        {
-            if (assembler.TryInsertHologram(assemblerHologram))
-            {
-
-                Destroy(objectCarried.gameObject);
-                objectCarried = null;
-
-                Destroy(assemblerHologram.gameObject);
-                assemblerHologram = null;
-            }
-        }
-
-        void DropObject()
-        {
-            objectCarried.GetComponent<SpriteRenderer>().sortingOrder = 5;
-
-            IEnumerable<Collider2D> interactableObjects = GetColliderInFrontPlayerOrderByDistance();
-
-            Collider2D deliveryPointTransform = GetNearestObjectInCollidersByTag(interactableObjects, "DeliveryPoint");
-
-            //On vérifie si le point de livraison se trouve dans dans notre champs d'action 
-            if (deliveryPointTransform != null)
-            {
-                var deliveryPoint = deliveryPointTransform.GetComponent<DeliveryPointBehaviour>();
-                var domino = objectCarried.GetComponent<DominoBehavior>().domino;
-
-                deliveryPoint.DeliveryDomino(domino);
-                objectCarried.gameObject.SetActive(false);
-                objectCarried = null;
-                return;
-            }
-
-            //On vérifie si une table se trouve dans notre champs d'action
-            if (interactableObjects.Any(o => o.transform.CompareTag("Table")))
-            {
-                var tables = interactableObjects.Where(o => o.transform.CompareTag("Table"));
-
-                foreach (var table in tables)
-                {
-                    TableBehaviour tableBehaviour = table.GetComponent<TableBehaviour>();
-                    if (tableBehaviour.CanAcceptObject())
-                    {
-                        tableBehaviour.SetObjectCarried(objectCarried);
-                        objectCarried = null;
-                        return;
-                    }
+                    GetObjectNear();
                 }
             }
 
-            //On vérifie que l'objet ne tombe pas dans un mur, si c'est le cas on set la position à la position du joueur
-            var objectCarriedCollider = objectCarried.GetComponent<Collider2D>();
-            List<Collider2D> collidersWhenDropObjectCarried = new();
-            Physics2D.OverlapCollider(objectCarriedCollider, new ContactFilter2D(), collidersWhenDropObjectCarried);
+        }
+    }
 
-            //Ici on compare à la fois les mur et les tables, car si on arrive à ce point dans la fonction c'est que toutes les tables sont prises
-            if (collidersWhenDropObjectCarried.Any(c => c.transform.CompareTag("Walls") || c.transform.CompareTag("Table")))
-            {
-                objectCarried.position = transform.position;
-            }
 
-            objectCarriedCollider.isTrigger = false;
-            objectCarried = null;
+    public void RotateClockwise(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+        RotateDomino(true);
+    }
 
+    public void RotateCounterClockwise(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+        RotateDomino(false);
+    }
+
+    private void RotateDomino(bool clockwise)
+    {
+        if (objectCarried == null) return;
+
+        var domino = objectCarried.GetComponent<DominoBehavior>();
+
+        if (clockwise) domino.RotateDominoClockwise();
+        else domino.RotateDominoCounterClockwise();
+
+        if (assemblerHologram != null) assemblerHologram.SetDomino(domino.domino);
+    }
+
+    #endregion
+
+    #region Interact with object utils functions
+    void GetObjectNear()
+    {
+        IEnumerable<Collider2D> interactableObjects = GetColliderInFrontPlayerOrderByDistance();
+
+        Collider2D block = GetNearestObjectInCollidersByTag(interactableObjects, "Blocks");
+
+        //D'abord on vérifie si on peut prendre un bloc devant nous
+        if (block != null)
+        {
+            block.isTrigger = true;
+            objectCarried = block.transform;
+            return;
         }
 
-        //Récupére les Colliders que le joueur colle, dans sa zone Circle
-        IEnumerable<Collider2D> GetColliderAroundPlayerOrderByDistance(bool getTriggerCollider = false)
+        //Sinon on essaie de prendre un bloc d'une table
+        TableBehaviour tableBehaviour = GetFirstTableWithObject(interactableObjects);
+        if (tableBehaviour != null)
         {
-            var circleTriggerZone = interactTriggerZone.GetComponent<CircleCollider2D>();
-
-            var colliders = new List<Collider2D>();
-            var contactFilter = new ContactFilter2D
-            {
-                useTriggers = getTriggerCollider
-            };
-            Physics2D.OverlapCollider(circleTriggerZone, contactFilter, colliders);
-
-            return colliders.OrderBy(c => Vector2.Distance(c.transform.position, transform.position)).ToList();
+            objectCarried = tableBehaviour.GetObjectCarried();
+            return;
         }
 
-        //Récupére les Colliders qui sont devant le joueur, dans sa zone Capsule
-        IEnumerable<Collider2D> GetColliderInFrontPlayerOrderByDistance(bool getTriggerCollider = false)
+        Collider2D box = GetNearestObjectInCollidersByTag(interactableObjects, "Crate");
+        if (box != null)
         {
-            var capsuleTriggerZone = interactTriggerZone.GetComponent<CapsuleCollider2D>();
-
-            var colliders = new List<Collider2D>();
-            var contactFilter = new ContactFilter2D
-            {
-                useTriggers = getTriggerCollider
-            };
-            Physics2D.OverlapCollider(capsuleTriggerZone, contactFilter, colliders);
-
-            return colliders.OrderBy(c => Vector2.Distance(c.transform.position, transform.position)).ToList();
+            CrateBehaviour boxBehaviour = box.GetComponent<CrateBehaviour>();
+            objectCarried = boxBehaviour.GetObject();
+            return;
         }
 
-        Collider2D GetNearestObjectInCollidersByTag(IEnumerable<Collider2D> colliders, string tagName)
+
+        //Dans le dernier cas on vérifie si on ne peux pas récupérer un bloc proche autour du joueur
+        Collider2D blockAroundPlayer = GetNearestObjectInCollidersByTag(interactableObjects, "Blocks");
+        if (blockAroundPlayer != null)
         {
-            //D'abord on vérifie si on peut prendre un bloc devant nous
-            if (colliders.Any(o => o.transform.CompareTag(tagName)))
-            {
-                return colliders.First(o => o.transform.CompareTag(tagName));
-            }
-
-            return null;
-        }
-
-        TableBehaviour GetFirstTableWithObject(IEnumerable<Collider2D> colliders)
-        {
-            if (colliders.Any(o => o.transform.CompareTag("Table")))
-            {
-                var tables = colliders.Where(o => o.transform.CompareTag("Table"));
-
-                foreach (var table in tables)
-                {
-                    TableBehaviour tableBehaviour = table.GetComponent<TableBehaviour>();
-                    if (!tableBehaviour.CanAcceptObject())
-                    {
-                        return tableBehaviour;
-                    }
-                }
-            }
-
-            return null;
-        }
-
-        #endregion
-
-        void UpdateOutlines()
-        {
-            IEnumerable<Collider2D> interactableObjects = GetColliderInFrontPlayerOrderByDistance();
-            Collider2D block = GetNearestObjectInCollidersByTag(interactableObjects, "Blocks");
-            TableBehaviour tableBehaviour = GetFirstTableWithObject(interactableObjects);
-
-            if (block != null)
-            {
-                var newObjectOutlined = block.transform;
-
-                if (newObjectOutlined != objectDetected && objectDetected != null)
-                    objectDetected.GetComponent<SpriteRenderer>().material.SetInt("_IsDetected", 0);
-
-                newObjectOutlined.GetComponent<SpriteRenderer>().material.SetInt("_IsDetected", 1);
-                objectDetected = newObjectOutlined;
-
-            }
-
-            //Check si une table se trouve devant nous, dans ce cas on on ajoute une outline sur l'objet dessus
-            else if (tableBehaviour != null)
-            {
-                var newObjectOutlined = tableBehaviour.GetReferenceObjectCarried().transform;
-
-                if (newObjectOutlined != objectDetected && objectDetected != null)
-                    objectDetected.GetComponent<SpriteRenderer>().material.SetInt("_IsDetected", 0);
-
-                newObjectOutlined.GetComponent<SpriteRenderer>().material.SetInt("_IsDetected", 1);
-                objectDetected = newObjectOutlined;
-            }
-
-            else if (objectDetected != null)
-            {
-                objectDetected.GetComponent<SpriteRenderer>().material.SetInt("_IsDetected", 0);
-                objectDetected = null;
-            }
-        }
-
-        //Todo : a passer dans une autre classe ? Oui 👍
-        public void LoadChooseLevel(InputAction.CallbackContext ctx)
-        {
-            if (ctx.performed)
-            {
-                SceneManager.LoadScene("ChooseLvl");
-            }
+            blockAroundPlayer.isTrigger = true;
+            objectCarried = blockAroundPlayer.transform;
         }
 
     }
+
+    private void AddHologramToAssembler()
+    {
+        var domino = objectCarried.GetComponent<DominoBehavior>();
+        assemblerHologram = assembler.AddHologram(domino.domino);
+    }
+
+    private void QuitAssemblerAndInsertDomino()
+    {
+        if (assembler.TryInsertHologram(assemblerHologram))
+        {
+
+            Destroy(objectCarried.gameObject);
+            objectCarried = null;
+
+            Destroy(assemblerHologram.gameObject);
+            assemblerHologram = null;
+        }
+    }
+
+    void DropObject()
+    {
+        objectCarried.GetComponent<SpriteRenderer>().sortingOrder = 5;
+
+        IEnumerable<Collider2D> interactableObjects = GetColliderInFrontPlayerOrderByDistance();
+
+        Collider2D deliveryPointTransform = GetNearestObjectInCollidersByTag(interactableObjects, "DeliveryPoint");
+
+        //On vérifie si le point de livraison se trouve dans dans notre champs d'action 
+        if (deliveryPointTransform != null)
+        {
+            var deliveryPoint = deliveryPointTransform.GetComponent<DeliveryPointBehaviour>();
+            var domino = objectCarried.GetComponent<DominoBehavior>().domino;
+
+            deliveryPoint.DeliveryDomino(domino);
+            objectCarried.gameObject.SetActive(false);
+            objectCarried = null;
+            return;
+        }
+
+        //On vérifie si une table se trouve dans notre champs d'action
+        if (interactableObjects.Any(o => o.transform.CompareTag("Table")))
+        {
+            var tables = interactableObjects.Where(o => o.transform.CompareTag("Table"));
+
+            foreach (var table in tables)
+            {
+                TableBehaviour tableBehaviour = table.GetComponent<TableBehaviour>();
+                if (tableBehaviour.CanAcceptObject())
+                {
+                    tableBehaviour.SetObjectCarried(objectCarried);
+                    objectCarried = null;
+                    return;
+                }
+            }
+        }
+
+        //On vérifie que l'objet ne tombe pas dans un mur, si c'est le cas on set la position à la position du joueur
+        var objectCarriedCollider = objectCarried.GetComponent<Collider2D>();
+        List<Collider2D> collidersWhenDropObjectCarried = new();
+        Physics2D.OverlapCollider(objectCarriedCollider, new ContactFilter2D(), collidersWhenDropObjectCarried);
+
+        //Ici on compare à la fois les mur et les tables, car si on arrive à ce point dans la fonction c'est que toutes les tables sont prises
+        if (collidersWhenDropObjectCarried.Any(c => c.transform.CompareTag("Walls") || c.transform.CompareTag("Table")))
+        {
+            objectCarried.position = transform.position;
+        }
+
+        objectCarriedCollider.isTrigger = false;
+        objectCarried = null;
+
+    }
+
+    //Récupére les Colliders que le joueur colle, dans sa zone Circle
+    IEnumerable<Collider2D> GetColliderAroundPlayerOrderByDistance(bool getTriggerCollider = false)
+    {
+        var circleTriggerZone = interactTriggerZone.GetComponent<CircleCollider2D>();
+
+        var colliders = new List<Collider2D>();
+        var contactFilter = new ContactFilter2D
+        {
+            useTriggers = getTriggerCollider
+        };
+        Physics2D.OverlapCollider(circleTriggerZone, contactFilter, colliders);
+
+        return colliders.OrderBy(c => Vector2.Distance(c.transform.position, transform.position)).ToList();
+    }
+
+    //Récupére les Colliders qui sont devant le joueur, dans sa zone Capsule
+    IEnumerable<Collider2D> GetColliderInFrontPlayerOrderByDistance(bool getTriggerCollider = false)
+    {
+        var capsuleTriggerZone = interactTriggerZone.GetComponent<CapsuleCollider2D>();
+
+        var colliders = new List<Collider2D>();
+        var contactFilter = new ContactFilter2D
+        {
+            useTriggers = getTriggerCollider
+        };
+        Physics2D.OverlapCollider(capsuleTriggerZone, contactFilter, colliders);
+
+        return colliders.OrderBy(c => Vector2.Distance(c.transform.position, transform.position)).ToList();
+    }
+
+    Collider2D GetNearestObjectInCollidersByTag(IEnumerable<Collider2D> colliders, string tagName)
+    {
+        //D'abord on vérifie si on peut prendre un bloc devant nous
+        if (colliders.Any(o => o.transform.CompareTag(tagName)))
+        {
+            return colliders.First(o => o.transform.CompareTag(tagName));
+        }
+
+        return null;
+    }
+
+    TableBehaviour GetFirstTableWithObject(IEnumerable<Collider2D> colliders)
+    {
+        if (colliders.Any(o => o.transform.CompareTag("Table")))
+        {
+            var tables = colliders.Where(o => o.transform.CompareTag("Table"));
+
+            foreach (var table in tables)
+            {
+                TableBehaviour tableBehaviour = table.GetComponent<TableBehaviour>();
+                if (!tableBehaviour.CanAcceptObject())
+                {
+                    return tableBehaviour;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    #endregion
+
+    void UpdateOutlines()
+    {
+        IEnumerable<Collider2D> interactableObjects = GetColliderInFrontPlayerOrderByDistance();
+        Collider2D block = GetNearestObjectInCollidersByTag(interactableObjects, "Blocks");
+        TableBehaviour tableBehaviour = GetFirstTableWithObject(interactableObjects);
+
+        if (block != null)
+        {
+            var newObjectOutlined = block.transform;
+
+            if (newObjectOutlined != objectDetected && objectDetected != null)
+                objectDetected.GetComponent<SpriteRenderer>().material.SetInt("_IsDetected", 0);
+
+            newObjectOutlined.GetComponent<SpriteRenderer>().material.SetInt("_IsDetected", 1);
+            objectDetected = newObjectOutlined;
+
+        }
+
+        //Check si une table se trouve devant nous, dans ce cas on on ajoute une outline sur l'objet dessus
+        else if (tableBehaviour != null)
+        {
+            var newObjectOutlined = tableBehaviour.GetReferenceObjectCarried().transform;
+
+            if (newObjectOutlined != objectDetected && objectDetected != null)
+                objectDetected.GetComponent<SpriteRenderer>().material.SetInt("_IsDetected", 0);
+
+            newObjectOutlined.GetComponent<SpriteRenderer>().material.SetInt("_IsDetected", 1);
+            objectDetected = newObjectOutlined;
+        }
+
+        else if (objectDetected != null)
+        {
+            objectDetected.GetComponent<SpriteRenderer>().material.SetInt("_IsDetected", 0);
+            objectDetected = null;
+        }
+    }
+
+    //Todo : a passer dans une autre classe ? Oui 👍
+    public void LoadChooseLevel(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            SceneManager.LoadScene("ChooseLvl");
+        }
+    }
+
+}
