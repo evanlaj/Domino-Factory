@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f71a102e55b4ae245aac3d3abc1dd49e
+guid: 42bb77f264db6284397bef3c0b3b9489
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -95,32 +95,6 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Server
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -162,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: redomino_spritesheet_0
+      name: purplomino_spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -176,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 678e915b45d681d4c841eec7b7e8ee2b
-      internalID: 784279341
+      spriteID: 11440a0930e5352418829c947fe11b0a
+      internalID: 2102099436
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_1
+      name: purplomino_spritesheet_1
       rect:
         serializedVersion: 2
         x: 512
@@ -197,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6d1b7b471b327b458c69b993d2b3068
-      internalID: 1103002683
+      spriteID: 5c335cd54f068bd46baab83e7e0f11ac
+      internalID: -1899155588
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_2
+      name: purplomino_spritesheet_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -218,14 +192,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce3e261124cc10a4d950f39d1b6f6b7d
-      internalID: -63640370
+      spriteID: 169de836430a3e047bd7704247132c41
+      internalID: -2051389058
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_3
+      name: purplomino_spritesheet_3
       rect:
         serializedVersion: 2
         x: 0
@@ -239,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1b571266ed569c4bbe5ade30bec0103
-      internalID: 81805170
+      spriteID: 3228ff2f3726f6a4ca556267f29d25a7
+      internalID: 888313415
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_4
+      name: purplomino_spritesheet_4
       rect:
         serializedVersion: 2
         x: 512
@@ -260,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22605d6b1efb8fd43bf606abbc71e5bd
-      internalID: -961809932
+      spriteID: ae008f83c3a814a41b9b22eb644ff9f2
+      internalID: 1151268941
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_5
+      name: purplomino_spritesheet_5
       rect:
         serializedVersion: 2
         x: 1024
@@ -281,14 +255,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b0e105030d7f8d42813e502671bdbcb
-      internalID: 1334708809
+      spriteID: 0dc1ce92d2610c945b315a224c3f0535
+      internalID: -2084416648
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_6
+      name: purplomino_spritesheet_6
       rect:
         serializedVersion: 2
         x: 0
@@ -302,14 +276,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31dfcfab066adb6498c7d11d9fb9a5a5
-      internalID: 93940513
+      spriteID: 26d6ca28669b7344f8d86e12bea1ae84
+      internalID: -842202516
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_7
+      name: purplomino_spritesheet_7
       rect:
         serializedVersion: 2
         x: 512
@@ -323,14 +297,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d36932c065068b3428c895e5d3a8fbb4
-      internalID: -1991608079
+      spriteID: aa895e70eee52bf4fb1b5afde96b0d4b
+      internalID: 363357721
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_8
+      name: purplomino_spritesheet_8
       rect:
         serializedVersion: 2
         x: 1024
@@ -344,8 +318,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2740487273fbfa74ea90e13857e56b23
-      internalID: -1816773334
+      spriteID: 9d2c107ffb6788d4ca6e2a971ea03ac4
+      internalID: -919104985
       vertices: []
       indices: 
       edges: []
@@ -361,15 +335,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      redomino_spritesheet_0: 784279341
-      redomino_spritesheet_1: 1103002683
-      redomino_spritesheet_2: -63640370
-      redomino_spritesheet_3: 81805170
-      redomino_spritesheet_4: -961809932
-      redomino_spritesheet_5: 1334708809
-      redomino_spritesheet_6: 93940513
-      redomino_spritesheet_7: -1991608079
-      redomino_spritesheet_8: -1816773334
+      purplomino_spritesheet_0: 2102099436
+      purplomino_spritesheet_1: -1899155588
+      purplomino_spritesheet_2: -2051389058
+      purplomino_spritesheet_3: 888313415
+      purplomino_spritesheet_4: 1151268941
+      purplomino_spritesheet_5: -2084416648
+      purplomino_spritesheet_6: -842202516
+      purplomino_spritesheet_7: 363357721
+      purplomino_spritesheet_8: -919104985
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

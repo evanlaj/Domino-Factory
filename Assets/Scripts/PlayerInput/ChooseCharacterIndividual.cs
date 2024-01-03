@@ -1,18 +1,22 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.U2D.Animation;
 
 public class ChooseCharacterIndividual : MonoBehaviour
 {
     [SerializeField] Transform rightArrow;
     [SerializeField] Transform leftArrow;
+
+    [SerializeField] List<SpriteLibraryAsset> skins;
+    int selectedSkinIndex = 0;
+    SpriteLibrary selfSpriteLib;
+
     [SerializeField] float delayBetweenInput = 0.15f;
     float timeSinceLastInput = 0;
 
     public PlayerJoinedManager manager;
-
-    SpriteRenderer characterSprite;
-    SpriteRenderer checkSprite;
 
     Animator animatorRightArrow;
     Animator animatorLeftArrow;
@@ -23,23 +27,17 @@ public class ChooseCharacterIndividual : MonoBehaviour
 
     Vector2 movement = Vector2.zero;
 
-    // Todo � remplacer par soit un changement de sprite / Soit un changement d'animator
-    Color[] colors = new Color[] { Color.red, Color.blue, Color.green, Color.gray, Color.cyan, Color.magenta };
 
-    int selectedColorIndex = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        characterSprite = GetComponent<SpriteRenderer>();
-        checkSprite = transform.Find("Check").GetComponentInChildren<SpriteRenderer>();
-
         animatorRightArrow = transform.Find("ArrowRParrent").GetComponentInChildren<Animator>();
         animatorLeftArrow = transform.Find("ArrowLParrent").GetComponentInChildren<Animator>();
-
-        characterSprite.color = colors[selectedColorIndex];
-        checkSprite.color = Color.clear;
         objectCompletlyCreated = true;
+
+        selfSpriteLib = GetComponent<SpriteLibrary>();
+        selfSpriteLib.spriteLibraryAsset = skins[selectedSkinIndex];
     }
 
     public void SelectCharacter(InputAction.CallbackContext ctx)
@@ -62,10 +60,9 @@ public class ChooseCharacterIndividual : MonoBehaviour
             GetComponent<Animator>().SetBool("isMovingDown", true);
             transform.Find("ArrowLParrent").GetComponentInChildren<SpriteRenderer>().color = Color.clear;
             transform.Find("ArrowRParrent").GetComponentInChildren<SpriteRenderer>().color = Color.clear;
-            checkSprite.color = Color.white;
             selectionValidated = true;
 
-            manager.PlayerValidate(GetComponent<PlayerInput>().playerIndex, colors[selectedColorIndex]);
+            manager.PlayerValidate(GetComponent<PlayerInput>().playerIndex, skins[selectedSkinIndex]);
         }
     }
 
@@ -76,27 +73,27 @@ public class ChooseCharacterIndividual : MonoBehaviour
         if (movement != Vector2.zero && timeSinceLastInput >= delayBetweenInput && !selectionValidated && objectCompletlyCreated)
         {
             timeSinceLastInput = 0;
+
             if (movement.x < -0.5)
             {
                 animatorLeftArrow.SetTrigger("Select");
-                selectedColorIndex--;
-                if (selectedColorIndex < 0)
+                selectedSkinIndex--;
+                if (selectedSkinIndex < 0)
                 {
-                    selectedColorIndex = colors.Length - 1;
+                    selectedSkinIndex = skins.Count - 1;
                 }
-                characterSprite.color = colors[selectedColorIndex];
-
             }
             else if (movement.x > 0.5)
             {
                 animatorRightArrow.SetTrigger("Select");
-                selectedColorIndex++;
-                if (selectedColorIndex >= colors.Length)
+                selectedSkinIndex++;
+                if (selectedSkinIndex >= skins.Count)
                 {
-                    selectedColorIndex = 0;
+                    selectedSkinIndex = 0;
                 }
-                characterSprite.color = colors[selectedColorIndex];
             }
+
+            selfSpriteLib.spriteLibraryAsset = skins[selectedSkinIndex];
         }
     }
 

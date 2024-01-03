@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.U2D.Animation;
 
 /// <summary>
 /// Cette classe est utilise pour gerer le choix des Personnages, puis la gestions PlayerInput / Device connecte a chaque joueurs.
@@ -22,7 +23,7 @@ public class PlayerJoinedManager : MonoBehaviour
     public class PlayerInfo
     {
         public int PlayerIndex;
-        public Color PlayerColor;
+        public SpriteLibraryAsset SpriteLibrary;
         public InputDevice Device;
         public string ControlScheme;
     }
@@ -125,7 +126,6 @@ public class PlayerJoinedManager : MonoBehaviour
             players.Add(new PlayerInfo()
             {
                 PlayerIndex = player.playerIndex,
-                PlayerColor = player.GetComponent<SpriteRenderer>().color,
                 Device = ctx.control.device,
                 ControlScheme = controlScheme
             });
@@ -133,9 +133,9 @@ public class PlayerJoinedManager : MonoBehaviour
     }
 
 
-    public void PlayerValidate(int playerIndex, Color playerColor)
+    public void PlayerValidate(int playerIndex, SpriteLibraryAsset spriteLibraryChosen)
     {
-        players.Find(p => p.PlayerIndex == playerIndex).PlayerColor = playerColor;
+        players.Find(p => p.PlayerIndex == playerIndex).SpriteLibrary = spriteLibraryChosen;
 
         playersReady++;
         if (playersReady == players.Count)
@@ -169,7 +169,7 @@ public class PlayerJoinedManager : MonoBehaviour
                 //On instancie un nouveau prefab du joueur lié au bon controller et au bon schema
                 var player = PlayerInput.Instantiate(redominoPrefab, controlScheme: playerInfo.ControlScheme, pairWithDevice: playerInfo.Device);
                 player.transform.position = spawns[player.playerIndex].transform.position;
-                player.GetComponent<SpriteRenderer>().color = playerInfo.PlayerColor;
+                player.GetComponent<SpriteLibrary>().spriteLibraryAsset = playerInfo.SpriteLibrary;
             }
         }
     }

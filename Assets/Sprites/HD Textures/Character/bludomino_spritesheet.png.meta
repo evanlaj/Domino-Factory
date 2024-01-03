@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f71a102e55b4ae245aac3d3abc1dd49e
+guid: 93490914229fb1f47bea5b8c4853257a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -107,32 +107,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -162,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: redomino_spritesheet_0
+      name: bludomino_spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -176,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 678e915b45d681d4c841eec7b7e8ee2b
-      internalID: 784279341
+      spriteID: 0cf10e2b6c5de4544a31708c7403e771
+      internalID: 1703535525
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_1
+      name: bludomino_spritesheet_1
       rect:
         serializedVersion: 2
         x: 512
@@ -197,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6d1b7b471b327b458c69b993d2b3068
-      internalID: 1103002683
+      spriteID: 95ff22c22dff7414d8050a8b41f982c8
+      internalID: -321638214
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_2
+      name: bludomino_spritesheet_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -218,14 +192,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce3e261124cc10a4d950f39d1b6f6b7d
-      internalID: -63640370
+      spriteID: 19f738df691e988408a3a09b9b868b76
+      internalID: 1753046458
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_3
+      name: bludomino_spritesheet_3
       rect:
         serializedVersion: 2
         x: 0
@@ -239,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1b571266ed569c4bbe5ade30bec0103
-      internalID: 81805170
+      spriteID: 59202e83dbe778f45a71f08f35daed41
+      internalID: 592618902
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_4
+      name: bludomino_spritesheet_4
       rect:
         serializedVersion: 2
         x: 512
@@ -260,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22605d6b1efb8fd43bf606abbc71e5bd
-      internalID: -961809932
+      spriteID: b9a00ddd6e55b44469a3ca7cca94918f
+      internalID: -2132528901
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_5
+      name: bludomino_spritesheet_5
       rect:
         serializedVersion: 2
         x: 1024
@@ -281,14 +255,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b0e105030d7f8d42813e502671bdbcb
-      internalID: 1334708809
+      spriteID: 9fe2fb85bffffad4bafef8a58abfbcb0
+      internalID: -815824863
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_6
+      name: bludomino_spritesheet_6
       rect:
         serializedVersion: 2
         x: 0
@@ -302,14 +276,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31dfcfab066adb6498c7d11d9fb9a5a5
-      internalID: 93940513
+      spriteID: b22098312d24d7148b11a3bd88722604
+      internalID: 598070245
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_7
+      name: bludomino_spritesheet_7
       rect:
         serializedVersion: 2
         x: 512
@@ -323,14 +297,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d36932c065068b3428c895e5d3a8fbb4
-      internalID: -1991608079
+      spriteID: e3ec47faf8c693c4c8e2db53fdf2933b
+      internalID: 80045210
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_8
+      name: bludomino_spritesheet_8
       rect:
         serializedVersion: 2
         x: 1024
@@ -344,8 +318,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2740487273fbfa74ea90e13857e56b23
-      internalID: -1816773334
+      spriteID: d0a0fe37d37ed7e40ba18445123e6554
+      internalID: -381073915
       vertices: []
       indices: 
       edges: []
@@ -361,15 +335,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      redomino_spritesheet_0: 784279341
-      redomino_spritesheet_1: 1103002683
-      redomino_spritesheet_2: -63640370
-      redomino_spritesheet_3: 81805170
-      redomino_spritesheet_4: -961809932
-      redomino_spritesheet_5: 1334708809
-      redomino_spritesheet_6: 93940513
-      redomino_spritesheet_7: -1991608079
-      redomino_spritesheet_8: -1816773334
+      bludomino_spritesheet_0: 1703535525
+      bludomino_spritesheet_1: -321638214
+      bludomino_spritesheet_2: 1753046458
+      bludomino_spritesheet_3: 592618902
+      bludomino_spritesheet_4: -2132528901
+      bludomino_spritesheet_5: -815824863
+      bludomino_spritesheet_6: 598070245
+      bludomino_spritesheet_7: 80045210
+      bludomino_spritesheet_8: -381073915
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

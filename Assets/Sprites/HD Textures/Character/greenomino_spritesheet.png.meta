@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f71a102e55b4ae245aac3d3abc1dd49e
+guid: 9c38c44560bd2f848a633414c9a95cbd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -95,32 +95,6 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Server
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -162,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: redomino_spritesheet_0
+      name: greenomino_spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -176,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 678e915b45d681d4c841eec7b7e8ee2b
-      internalID: 784279341
+      spriteID: 83e31a1e233b0aa4eb8562edd72dc13b
+      internalID: 1200057809
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_1
+      name: greenomino_spritesheet_1
       rect:
         serializedVersion: 2
         x: 512
@@ -197,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6d1b7b471b327b458c69b993d2b3068
-      internalID: 1103002683
+      spriteID: 015e326f66efa054e91eeb87a804e321
+      internalID: 466386090
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_2
+      name: greenomino_spritesheet_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -218,14 +192,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce3e261124cc10a4d950f39d1b6f6b7d
-      internalID: -63640370
+      spriteID: ee6e6f75ef2bca44bb65873b68680061
+      internalID: 1464788689
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_3
+      name: greenomino_spritesheet_3
       rect:
         serializedVersion: 2
         x: 0
@@ -239,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1b571266ed569c4bbe5ade30bec0103
-      internalID: 81805170
+      spriteID: 9aaac0cfc4028f545b93481cf4a4e314
+      internalID: -460712513
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_4
+      name: greenomino_spritesheet_4
       rect:
         serializedVersion: 2
         x: 512
@@ -260,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22605d6b1efb8fd43bf606abbc71e5bd
-      internalID: -961809932
+      spriteID: 43953615d3e70564aad931fe5ae55462
+      internalID: 1273798918
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_5
+      name: greenomino_spritesheet_5
       rect:
         serializedVersion: 2
         x: 1024
@@ -281,14 +255,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b0e105030d7f8d42813e502671bdbcb
-      internalID: 1334708809
+      spriteID: afe284af529ad924e91e4979f5cf3ce9
+      internalID: -1396364306
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_6
+      name: greenomino_spritesheet_6
       rect:
         serializedVersion: 2
         x: 0
@@ -302,14 +276,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31dfcfab066adb6498c7d11d9fb9a5a5
-      internalID: 93940513
+      spriteID: 1e04ccb2d0a1441419049a2680d70d9a
+      internalID: -1003472971
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_7
+      name: greenomino_spritesheet_7
       rect:
         serializedVersion: 2
         x: 512
@@ -323,14 +297,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d36932c065068b3428c895e5d3a8fbb4
-      internalID: -1991608079
+      spriteID: 64370aa4c315ffe4ca78a4b76977949a
+      internalID: 712528376
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_8
+      name: greenomino_spritesheet_8
       rect:
         serializedVersion: 2
         x: 1024
@@ -344,8 +318,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2740487273fbfa74ea90e13857e56b23
-      internalID: -1816773334
+      spriteID: e94c3c2fa93baee49a46a079638bbebc
+      internalID: -1268638153
       vertices: []
       indices: 
       edges: []
@@ -361,15 +335,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      redomino_spritesheet_0: 784279341
-      redomino_spritesheet_1: 1103002683
-      redomino_spritesheet_2: -63640370
-      redomino_spritesheet_3: 81805170
-      redomino_spritesheet_4: -961809932
-      redomino_spritesheet_5: 1334708809
-      redomino_spritesheet_6: 93940513
-      redomino_spritesheet_7: -1991608079
-      redomino_spritesheet_8: -1816773334
+      greenomino_spritesheet_0: 1200057809
+      greenomino_spritesheet_1: 466386090
+      greenomino_spritesheet_2: 1464788689
+      greenomino_spritesheet_3: -460712513
+      greenomino_spritesheet_4: 1273798918
+      greenomino_spritesheet_5: -1396364306
+      greenomino_spritesheet_6: -1003472971
+      greenomino_spritesheet_7: 712528376
+      greenomino_spritesheet_8: -1268638153
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

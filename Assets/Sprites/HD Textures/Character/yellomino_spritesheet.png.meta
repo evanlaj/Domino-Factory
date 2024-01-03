@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f71a102e55b4ae245aac3d3abc1dd49e
+guid: 8deff21745dfd044ab5508be15e59fdd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -95,32 +95,6 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Server
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -162,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: redomino_spritesheet_0
+      name: yellomino_spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -176,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 678e915b45d681d4c841eec7b7e8ee2b
-      internalID: 784279341
+      spriteID: 8363f781d57a4fd469d3065f8f28faf2
+      internalID: 987580307
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_1
+      name: yellomino_spritesheet_1
       rect:
         serializedVersion: 2
         x: 512
@@ -197,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6d1b7b471b327b458c69b993d2b3068
-      internalID: 1103002683
+      spriteID: badadc55c5c71224291a7d2e4dadddfe
+      internalID: 264674389
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_2
+      name: yellomino_spritesheet_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -218,14 +192,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce3e261124cc10a4d950f39d1b6f6b7d
-      internalID: -63640370
+      spriteID: 73ff6ddfa7a0b3646ac564c900ef4051
+      internalID: 1914555423
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_3
+      name: yellomino_spritesheet_3
       rect:
         serializedVersion: 2
         x: 0
@@ -239,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1b571266ed569c4bbe5ade30bec0103
-      internalID: 81805170
+      spriteID: 39479e6a3925ec24dafff23bd6f6d32b
+      internalID: -2097694072
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_4
+      name: yellomino_spritesheet_4
       rect:
         serializedVersion: 2
         x: 512
@@ -260,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22605d6b1efb8fd43bf606abbc71e5bd
-      internalID: -961809932
+      spriteID: 79c0a29cfc36df747ad74c13ceb9b61e
+      internalID: 1398299131
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_5
+      name: yellomino_spritesheet_5
       rect:
         serializedVersion: 2
         x: 1024
@@ -281,14 +255,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b0e105030d7f8d42813e502671bdbcb
-      internalID: 1334708809
+      spriteID: ac9d27a04089e9440918cea6d1787b1f
+      internalID: 353651355
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_6
+      name: yellomino_spritesheet_6
       rect:
         serializedVersion: 2
         x: 0
@@ -302,14 +276,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31dfcfab066adb6498c7d11d9fb9a5a5
-      internalID: 93940513
+      spriteID: d1681caa97f898547871bff005906bc8
+      internalID: -1903451253
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_7
+      name: yellomino_spritesheet_7
       rect:
         serializedVersion: 2
         x: 512
@@ -323,14 +297,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d36932c065068b3428c895e5d3a8fbb4
-      internalID: -1991608079
+      spriteID: b0b0f723f6ea48f4dadd1b97c8a8bce0
+      internalID: 459712741
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_8
+      name: yellomino_spritesheet_8
       rect:
         serializedVersion: 2
         x: 1024
@@ -344,8 +318,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2740487273fbfa74ea90e13857e56b23
-      internalID: -1816773334
+      spriteID: bb4d2cf5e7064b146b96fe443e2d4173
+      internalID: 3396380
       vertices: []
       indices: 
       edges: []
@@ -361,15 +335,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      redomino_spritesheet_0: 784279341
-      redomino_spritesheet_1: 1103002683
-      redomino_spritesheet_2: -63640370
-      redomino_spritesheet_3: 81805170
-      redomino_spritesheet_4: -961809932
-      redomino_spritesheet_5: 1334708809
-      redomino_spritesheet_6: 93940513
-      redomino_spritesheet_7: -1991608079
-      redomino_spritesheet_8: -1816773334
+      yellomino_spritesheet_0: 987580307
+      yellomino_spritesheet_1: 264674389
+      yellomino_spritesheet_2: 1914555423
+      yellomino_spritesheet_3: -2097694072
+      yellomino_spritesheet_4: 1398299131
+      yellomino_spritesheet_5: 353651355
+      yellomino_spritesheet_6: -1903451253
+      yellomino_spritesheet_7: 459712741
+      yellomino_spritesheet_8: 3396380
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

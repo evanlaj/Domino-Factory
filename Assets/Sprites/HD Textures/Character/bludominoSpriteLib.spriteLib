@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: idle_down
+    m_Hash: 297738837
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: redomino_spritesheet_0
+      m_Hash: 66407880
+      m_Sprite: {fileID: 784279341, guid: f71a102e55b4ae245aac3d3abc1dd49e, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 1703535525, guid: 93490914229fb1f47bea5b8c4853257a, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 1
+  - m_Name: idle_side
+    m_Hash: 784443867
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: redomino_spritesheet_6
+      m_Hash: 714533117
+      m_Sprite: {fileID: 93940513, guid: f71a102e55b4ae245aac3d3abc1dd49e, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 598070245, guid: 93490914229fb1f47bea5b8c4853257a, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 1
+  - m_Name: walk_down
+    m_Hash: 123196578
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: redomino_spritesheet_0
+      m_Hash: 66407880
+      m_Sprite: {fileID: 784279341, guid: f71a102e55b4ae245aac3d3abc1dd49e, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 1703535525, guid: 93490914229fb1f47bea5b8c4853257a, type: 3}
+    - m_Name: redomino_spritesheet_1
+      m_Hash: 888307038
+      m_Sprite: {fileID: 1103002683, guid: f71a102e55b4ae245aac3d3abc1dd49e, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: -321638214, guid: 93490914229fb1f47bea5b8c4853257a, type: 3}
+    - m_Name: redomino_spritesheet_2
+      m_Hash: 771435748
+      m_Sprite: {fileID: -63640370, guid: f71a102e55b4ae245aac3d3abc1dd49e, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 1753046458, guid: 93490914229fb1f47bea5b8c4853257a, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 3
+  - m_Name: idle_up
+    m_Hash: 632329083
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: redomino_spritesheet_3
+      m_Hash: 452729970
+      m_Sprite: {fileID: 81805170, guid: f71a102e55b4ae245aac3d3abc1dd49e, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 592618902, guid: 93490914229fb1f47bea5b8c4853257a, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 1
+  - m_Name: walk_side
+    m_Hash: 942235436
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: redomino_spritesheet_6
+      m_Hash: 714533117
+      m_Sprite: {fileID: 93940513, guid: f71a102e55b4ae245aac3d3abc1dd49e, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 598070245, guid: 93490914229fb1f47bea5b8c4853257a, type: 3}
+    - m_Name: redomino_spritesheet_7
+      m_Hash: 496097387
+      m_Sprite: {fileID: -1991608079, guid: f71a102e55b4ae245aac3d3abc1dd49e, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 80045210, guid: 93490914229fb1f47bea5b8c4853257a, type: 3}
+    - m_Name: redomino_spritesheet_8
+      m_Hash: 221169146
+      m_Sprite: {fileID: -1816773334, guid: f71a102e55b4ae245aac3d3abc1dd49e, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: -381073915, guid: 93490914229fb1f47bea5b8c4853257a, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 3
+  - m_Name: walk_up
+    m_Hash: 574853736
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: redomino_spritesheet_3
+      m_Hash: 452729970
+      m_Sprite: {fileID: 81805170, guid: f71a102e55b4ae245aac3d3abc1dd49e, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 592618902, guid: 93490914229fb1f47bea5b8c4853257a, type: 3}
+    - m_Name: redomino_spritesheet_4
+      m_Hash: 77105617
+      m_Sprite: {fileID: -961809932, guid: f71a102e55b4ae245aac3d3abc1dd49e, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: -2132528901, guid: 93490914229fb1f47bea5b8c4853257a, type: 3}
+    - m_Name: redomino_spritesheet_5
+      m_Hash: 866105671
+      m_Sprite: {fileID: 1334708809, guid: f71a102e55b4ae245aac3d3abc1dd49e, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: -815824863, guid: 93490914229fb1f47bea5b8c4853257a, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 3
+  m_PrimaryLibraryGUID: 6e4d9a3e33ec6f241bdf749c5f636d8f
+  m_ModificationHash: 638398287679572913
+  m_Version: 1

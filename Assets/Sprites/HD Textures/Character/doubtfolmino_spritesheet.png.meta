@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f71a102e55b4ae245aac3d3abc1dd49e
+guid: 2576f3201a3683744b7ddf82bf060f6e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -95,32 +95,6 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Server
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -162,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: redomino_spritesheet_0
+      name: doubtfolmino_spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -176,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 678e915b45d681d4c841eec7b7e8ee2b
-      internalID: 784279341
+      spriteID: 1ff12f9c107570943b2d5cb4dc13ed0d
+      internalID: -27196290
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_1
+      name: doubtfolmino_spritesheet_1
       rect:
         serializedVersion: 2
         x: 512
@@ -197,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6d1b7b471b327b458c69b993d2b3068
-      internalID: 1103002683
+      spriteID: 60224306543209741b39cd5f2ff02d31
+      internalID: 1138798420
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_2
+      name: doubtfolmino_spritesheet_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -218,14 +192,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce3e261124cc10a4d950f39d1b6f6b7d
-      internalID: -63640370
+      spriteID: 28c13824a2e303a4d8077974c5523f46
+      internalID: 831635845
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_3
+      name: doubtfolmino_spritesheet_3
       rect:
         serializedVersion: 2
         x: 0
@@ -239,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1b571266ed569c4bbe5ade30bec0103
-      internalID: 81805170
+      spriteID: 90fe87a065ff1e34092e12f57221a0ff
+      internalID: -750195252
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_4
+      name: doubtfolmino_spritesheet_4
       rect:
         serializedVersion: 2
         x: 512
@@ -260,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22605d6b1efb8fd43bf606abbc71e5bd
-      internalID: -961809932
+      spriteID: 5141ee7124287f346b54a6d14b17f516
+      internalID: -168982087
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_5
+      name: doubtfolmino_spritesheet_5
       rect:
         serializedVersion: 2
         x: 1024
@@ -281,14 +255,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b0e105030d7f8d42813e502671bdbcb
-      internalID: 1334708809
+      spriteID: 75158241b68dbd247a383bde67261847
+      internalID: 736978957
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_6
+      name: doubtfolmino_spritesheet_6
       rect:
         serializedVersion: 2
         x: 0
@@ -302,14 +276,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31dfcfab066adb6498c7d11d9fb9a5a5
-      internalID: 93940513
+      spriteID: afa9d35657b4cb948a389ca3dd83dd27
+      internalID: 1840286922
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_7
+      name: doubtfolmino_spritesheet_7
       rect:
         serializedVersion: 2
         x: 512
@@ -323,14 +297,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d36932c065068b3428c895e5d3a8fbb4
-      internalID: -1991608079
+      spriteID: a8542cc45d6dfdd46bbcc6d4d2857f22
+      internalID: 579136404
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redomino_spritesheet_8
+      name: doubtfolmino_spritesheet_8
       rect:
         serializedVersion: 2
         x: 1024
@@ -344,8 +318,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2740487273fbfa74ea90e13857e56b23
-      internalID: -1816773334
+      spriteID: 8f9499b00d724be4cb1244613bfb7815
+      internalID: 1441663159
       vertices: []
       indices: 
       edges: []
@@ -361,15 +335,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      redomino_spritesheet_0: 784279341
-      redomino_spritesheet_1: 1103002683
-      redomino_spritesheet_2: -63640370
-      redomino_spritesheet_3: 81805170
-      redomino_spritesheet_4: -961809932
-      redomino_spritesheet_5: 1334708809
-      redomino_spritesheet_6: 93940513
-      redomino_spritesheet_7: -1991608079
-      redomino_spritesheet_8: -1816773334
+      doubtfolmino_spritesheet_0: -27196290
+      doubtfolmino_spritesheet_1: 1138798420
+      doubtfolmino_spritesheet_2: 831635845
+      doubtfolmino_spritesheet_3: -750195252
+      doubtfolmino_spritesheet_4: -168982087
+      doubtfolmino_spritesheet_5: 736978957
+      doubtfolmino_spritesheet_6: 1840286922
+      doubtfolmino_spritesheet_7: 579136404
+      doubtfolmino_spritesheet_8: 1441663159
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
