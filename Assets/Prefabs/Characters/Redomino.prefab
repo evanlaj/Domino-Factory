@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 8376091701626751805}
   m_Layer: 8
   m_Name: Redomino
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -460,8 +460,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CategoryHash: 0
-  m_labelHash: 0
+  m_CategoryHash: 3.0155645e-28
+  m_labelHash: 1.44176635e-36
   m_SpriteKey: 0
   m_SpriteHash: 733890048
 --- !u!1 &3157886776523026797
