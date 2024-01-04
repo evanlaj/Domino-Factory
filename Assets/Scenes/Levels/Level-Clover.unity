@@ -506,14 +506,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1223481947}
     m_Modifications:
-    - target: {fileID: 1604770157557847709, guid: a05034d8b462f34489622a197975e6fd, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: baaf796cef94fae479cd7e93fe6c0dd4, type: 3}
-    - target: {fileID: 1662257570102149834, guid: a05034d8b462f34489622a197975e6fd, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: baaf796cef94fae479cd7e93fe6c0dd4, type: 3}
     - target: {fileID: 4257253851641409264, guid: a05034d8b462f34489622a197975e6fd, type: 3}
       propertyPath: m_Name
       value: Transition
@@ -525,10 +517,6 @@ PrefabInstance:
     - target: {fileID: 8837075444272235485, guid: a05034d8b462f34489622a197975e6fd, type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8837075444272235485, guid: a05034d8b462f34489622a197975e6fd, type: 3}
-      propertyPath: m_RootOrder
-      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8837075444272235485, guid: a05034d8b462f34489622a197975e6fd, type: 3}
       propertyPath: m_AnchorMax.x
