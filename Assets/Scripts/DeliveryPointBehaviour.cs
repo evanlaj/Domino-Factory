@@ -45,6 +45,7 @@ public class DeliveryPointBehaviour : MonoBehaviour
             numberOfPlayerAround++;
             GetComponent<Animator>().SetInteger("NbsPlayerAround", numberOfPlayerAround);
 
+            particleSystem.gameObject.SetActive(true);
             particleSystem.Play();
         }
     }
@@ -58,6 +59,7 @@ public class DeliveryPointBehaviour : MonoBehaviour
 
             if(numberOfPlayerAround == 0)
             {
+                particleSystem.gameObject.SetActive(false);
                 particleSystem.Stop();
             }
         }
